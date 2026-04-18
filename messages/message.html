@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HelpHub AI — Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #f6efe3;
+    --panel: rgba(253, 248, 241, 0.95);
+    --ink: #1d2323;
+    --muted: #78766f;
+    --hero: #232b2c;
+    --teal: #159689;
+    --teal-bright: #21c6b2;
+    --teal-copy: #3f7a70;
+    --radius-xl: 28px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+    --radius-pill: 999px;
+    --shell-width: 875px;
+    --shadow-card: 0 24px 50px -34px rgba(69, 63, 53, 0.4);
+    --shadow-hero: 0 28px 60px -34px rgba(22, 28, 29, 0.72);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: "Manrope", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 3% 14%, rgba(205, 238, 226, 0.7), transparent 30%),
+      radial-gradient(circle at 98% 8%, rgba(248, 219, 177, 0.62), transparent 28%),
+      radial-gradient(circle at 15% 90%, rgba(247, 239, 216, 0.9), transparent 35%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+      var(--page-bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.48), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+    mix-blend-mode: screen;
+  }
+
+  .shell {
+    width: min(var(--shell-width), calc(100% - 36px));
+    margin: 0 auto;
+  }
+
+  .topbar {
+    border-bottom: 1px solid rgba(34, 38, 38, 0.06);
+    background: rgba(247, 239, 228, 0.62);
+    backdrop-filter: blur(8px);
+  }
+
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .brand-mark {
+    width: 31px;
+    height: 31px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #169989, #128a80);
+    color: #f7fffd;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 10px 20px -14px rgba(21, 150, 137, 0.95);
+  }
+
+  .brand-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav a {
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    color: #60645f;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+  }
+
+  .nav a.is-active {
+    color: #5f8178;
+    background: rgba(226, 243, 235, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(179, 217, 203, 0.45);
+  }
+
+  .page {
+    padding: 26px 0 40px;
+  }
+
+  .hero {
+    padding: 30px 22px 28px;
+    border-radius: var(--radius-xl);
+    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+      linear-gradient(180deg, var(--hero) 0%, #21292a 100%);
+    box-shadow: var(--shadow-hero);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hero .eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    max-width: 760px;
+    font-size: clamp(2.55rem, 3.4vw, 3.62rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+
+  .hero-copy {
+    max-width: 610px;
+    color: rgba(244, 243, 239, 0.72);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .hero-meta,
+  .grid {
+    display: none;
+  }
+
+  .content-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--panel);
+    border-radius: 26px;
+    padding: 28px 22px 22px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+  }
+
+  .card .eyebrow {
+    color: var(--teal-copy);
+    margin-bottom: 14px;
+  }
+
+  .card-title {
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.04;
+    letter-spacing: -0.055em;
+    font-weight: 800;
+    margin-bottom: 22px;
+  }
+
+  .conversation-card,
+  .compose-card {
+    min-height: 436px;
+  }
+
+  .conversation-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .conversation-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 14px 13px;
+    border-radius: 21px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(235, 227, 214, 0.88);
+    box-shadow: 0 18px 26px -26px rgba(77, 72, 60, 0.45);
+  }
+
+  .conversation-content {
+    min-width: 0;
+  }
+
+  .conversation-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .conversation-preview {
+    max-width: 325px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .time-pill {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: linear-gradient(180deg, #edf9f6 0%, #e5f3ee 100%);
+    color: #4e857a;
+    font-size: 12px;
+    line-height: 1.15;
+    font-weight: 800;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  .compose-card .card-title {
+    max-width: 280px;
+  }
+
+  .compose-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .field-label {
+    color: #655f57;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .field-control {
+    width: 100%;
+    border: 1px solid rgba(233, 224, 211, 0.96);
+    border-radius: var(--radius-md);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 16px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .field-control:focus {
+    border-color: rgba(21, 150, 137, 0.72);
+    box-shadow: 0 0 0 4px rgba(21, 150, 137, 0.12);
+  }
+
+  select.field-control {
+    appearance: none;
+    padding-right: 44px;
+    background-image:
+      linear-gradient(45deg, transparent 50%, #a29583 50%),
+      linear-gradient(135deg, #a29583 50%, transparent 50%);
+    background-position:
+      calc(100% - 22px) calc(50% - 1px),
+      calc(100% - 17px) calc(50% - 1px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  textarea.field-control {
+    min-height: 108px;
+    resize: vertical;
+  }
+
+  .send-button {
+    margin-top: 2px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    padding: 14px 18px;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-bright) 100%);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 14px 26px -16px rgba(21, 150, 137, 0.8);
+    transition: transform 0.12s ease, box-shadow 0.2s ease;
+  }
+
+  .send-button:hover {
+    box-shadow: 0 18px 30px -18px rgba(21, 150, 137, 0.95);
+  }
+
+  .send-button:active {
+    transform: translateY(1px);
+  }
+
+  @media (max-width: 900px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .conversation-card,
+    .compose-card {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .shell {
+      width: min(100% - 24px, var(--shell-width));
+    }
+
+    .topbar-inner {
+      padding: 12px 0;
+      gap: 10px;
+    }
+
+    .brand-text {
+      font-size: 14px;
+    }
+
+    .nav {
+      gap: 4px;
+    }
+
+    .nav a {
+      padding: 7px 11px;
+      font-size: 12px;
+    }
+
+    .page {
+      padding-top: 18px;
+    }
+
+    .hero,
+    .card {
+      border-radius: 24px;
+    }
+
+    .hero {
+      padding: 24px 18px 22px;
+    }
+
+    .card {
+      padding: 24px 18px 18px;
+    }
+
+    .content-grid {
+      margin-top: 20px;
+      gap: 14px;
+    }
+
+    .conversation-item {
+      padding: 12px;
+    }
+
+    .conversation-preview {
+      max-width: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">H</span>
+        <span class="brand-text">HelpHub AI</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#">Dashboard</a>
+        <a href="#">Explore</a>
+        <a href="#" class="is-active">Messages</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell page">
+    <section class="hero">
+      <div class="eyebrow">Interaction / Messaging</div>
+      <h1 class="hero-title">Keep support moving through direct communication.</h1>
+      <p class="hero-copy">Basic messaging gives helpers and requesters a clear follow-up path once a match happens.</p>
+      <div class="hero-meta">Both • Karachi</div>
+    </section>
+
+    <section class="content-grid">
+      <article class="card conversation-card">
+        <div class="eyebrow">Conversation Stream</div>
+        <h2 class="card-title">Recent messages</h2>
+
+        <div class="conversation-list">
+          <div class="conversation-item">
+            <div class="conversation-content">
+              <div class="conversation-title">Ayesha Khan - Sara Noor</div>
+              <p class="conversation-preview">I checked your portfolio request. Share the breakpoint screenshots and I can suggest fixes.</p>
+            </div>
+            <div class="time-pill">09:45<br>AM</div>
+          </div>
+
+          <div class="conversation-item">
+            <div class="conversation-content">
+              <div class="conversation-title">Hassan Ali - Ayesha Khan</div>
+              <p class="conversation-preview">Your event poster concept is solid. I would tighten the CTA and reduce the background texture.</p>
+            </div>
+            <div class="time-pill">11:10<br>AM</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card compose-card">
+        <div class="eyebrow">Send Message</div>
+        <h2 class="card-title">Start a conversation</h2>
+
+        <form class="compose-form">
+          <label class="field-label" for="recipient">To</label>
+          <select class="field-control" id="recipient" name="recipient">
+            <option>Ayesha Khan</option>
+            <option>Sara Noor</option>
+            <option>Hassan Ali</option>
+          </select>
+
+          <label class="field-label" for="message">Message</label>
+          <textarea class="field-control" id="message" name="message" placeholder="Share support details, ask for files, or suggest next steps."></textarea>
+
+          <button class="send-button" type="submit">Send</button>
+        </form>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="eyebrow">PUBLIC PROFILE</div>
+        <h2 class="card-title">Skills and reputation</h2>
+
+        <div class="row">
+          <span class="label">Trust score</span>
+          <span class="value">100%</span>
+        </div>
+        <div class="row">
+          <span class="label">Contributions</span>
+          <span class="value">35</span>
+        </div>
+
+        <div class="section-label">Skills</div>
+        <div class="chips">
+          <span class="chip">Figma</span>
+          <span class="chip">UI/UX</span>
+          <span class="chip">HTML/CSS</span>
+          <span class="chip">Career Guidance</span>
+        </div>
+
+        <div class="section-label">Badges</div>
+        <div class="chips">
+          <span class="chip">Design Ally</span>
+          <span class="chip">Fast Responder</span>
+          <span class="chip">Top Mentor</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">EDIT PROFILE</div>
+        <h2 class="card-title">Update your identity</h2>
+
+        <form class="form-grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" value="Ayesha Khan" />
+          </div>
+          <div class="field">
+            <label for="location">Location</label>
+            <input id="location" type="text" value="Karachi" />
+          </div>
+          <div class="field full">
+            <label for="skills">Skills</label>
+            <input id="skills" type="text" value="Figma, UI/UX, HTML/CSS, Career Guidance" />
+          </div>
+          <div class="field full">
+            <label for="interests">Interests</label>
+            <input id="interests" type="text" value="Hackathons, UI/UX, Community Building" />
+          </div>
+          <div class="field full">
+            <button type="submit" class="btn-save">Save profile</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    document.title = "HelpHub AI - Messages";
+    document.querySelector(".compose-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
+  </script>
+</body>
+</html>

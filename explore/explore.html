@@ -1,0 +1,633 @@
+<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Explore Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6f1e6;
+            --bg-soft: #fbf7ef;
+            --surface: rgba(255, 252, 247, 0.92);
+            --surface-strong: #fffdf8;
+            --ink: #1c2326;
+            --muted: #6e746f;
+            --line: rgba(32, 41, 44, 0.06);
+            --shadow: 0 18px 45px rgba(74, 63, 46, 0.12);
+            --hero: #1f272a;
+            --mint: #dcf3ea;
+            --mint-text: #2e7c69;
+            --teal: #1e8b85;
+            --coral: #ffd5d0;
+            --coral-text: #b25d57;
+            --gold: #efe6be;
+            --gold-text: #857349;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(195, 239, 220, 0.75), transparent 29%),
+                radial-gradient(circle at top right, rgba(255, 226, 182, 0.5), transparent 32%),
+                linear-gradient(180deg, #faf6ee 0%, #f6f1e6 48%, #f8f3ea 100%);
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 12%;
+            max-width: 1245px;
+            background-color: #f8f1e8d6;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #111827;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #0d9488;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            background-color: #d8efe8b3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #065f46;
+        }
+
+        /* Mobile Hamburger Logic */
+        .menu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #374151;
+            border-radius: 2px;
+        }
+
+
+        .hero {
+            background: linear-gradient(180deg, #1e2629 0%, #20292c 100%);
+            color: #fff;
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            padding: 15px 26px 28px;
+            width: 948px;
+            margin: 20px 0px 0px 149px;
+            min-height: 236px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.68);
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            max-width: 690px;
+            font-size: clamp(2rem, 4vw, 3.45rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+        }
+
+        .hero p {
+            margin: 18px 0 0;
+            max-width: 520px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 0.88fr 1.22fr;
+            gap: 18px;
+            margin-top: 18px;
+            align-items: start;
+        }
+
+        .panel,
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .panel {
+            padding: 28px 16px 24px;
+            min-height: 100%;
+            width: 368px;
+            margin: 20px 7px 0px 147px;
+        }
+
+        .panel .eyebrow {
+            color: rgba(34, 44, 46, 0.44);
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        .panel h2 {
+            margin: 0 0 30px 7px;
+            max-width: 260px;
+            font-size: clamp(2rem, 3vw, 3rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+        }
+
+        .filter-group {
+            margin-top: 24px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 12px;
+            color: #757b75;
+            margin-bottom: 10px;
+            margin-left: 19px;
+            font-weight: 600;
+        }
+
+        .field,
+        .select-wrap select,
+        .input-wrap input {
+            width: 100%;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 18px;
+            min-height: 56px;
+            padding: 0 18px;
+            font: inherit;
+            color: #4e544f;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        .select-wrap {
+            position: relative;
+        }
+
+        .select-wrap::after {
+            content: "^";
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-46%) rotate(180deg);
+            color: #8b8f89;
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .select-wrap select {
+            appearance: none;
+        }
+
+        .input-wrap input::placeholder {
+            color: #9da29b;
+        }
+
+        .feed {
+            display: grid;
+            gap: 16px;
+            margin: 20px 148px 0px 0px;
+        }
+
+        .card {
+            padding: 16px 16px 18px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 0 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .pill.mint {
+            background: var(--mint);
+            color: var(--mint-text);
+        }
+
+        .pill.coral {
+            background: var(--coral);
+            color: var(--coral-text);
+        }
+
+        .pill.gold {
+            background: var(--gold);
+            color: var(--gold-text);
+        }
+
+        .request-title {
+            margin: 0;
+            font-size: 1.25rem;
+            line-height: 1.1;
+            letter-spacing: -0.045em;
+        }
+
+        .request-copy {
+            margin: 10px 0 16px;
+            color: #7d827d;
+            font-size: 12px;
+            line-height: 1.6;
+            max-width: 620px;
+        }
+
+        .request-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 18px;
+        }
+
+        .person {
+            display: grid;
+            gap: 6px;
+        }
+
+        .person strong {
+            font-size: 14px;
+            letter-spacing: -0.03em;
+        }
+
+        .person span {
+            font-size: 12px;
+            color: #8a8f89;
+        }
+
+        .details-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 0 16px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            background: rgba(253, 250, 244, 0.95);
+            border: 1px solid rgba(31, 39, 42, 0.06);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        }
+
+        @media (max-width: 980px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .panel h2 {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .shell {
+                width: min(100% - 28px, 760px);
+                padding-top: 12px;
+            }
+
+            .topbar {
+                position: relative;
+                padding-bottom: 18px;
+            }
+
+            .menu-button {
+                display: inline-flex;
+                position: relative;
+                z-index: 3;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                right: 0;
+                left: 0;
+                z-index: 2;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                padding: 18px;
+                background: rgba(255, 252, 247, 0.98);
+                border: 1px solid rgba(31, 39, 42, 0.06);
+                border-radius: 22px;
+                box-shadow: 0 20px 40px rgba(58, 52, 44, 0.14);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            }
+
+            .nav-links a {
+                padding: 12px 14px;
+                border-radius: 14px;
+                background: #fffdf8;
+            }
+
+            .nav-links a.active {
+                background: rgba(232, 243, 239, 0.95);
+            }
+
+            .nav-toggle:checked~.topbar .nav-links {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-toggle:checked~.topbar .menu-button span {
+                background: transparent;
+            }
+
+            .nav-toggle:checked~.topbar .menu-button span::before {
+                transform: translateY(6px) rotate(45deg);
+            }
+
+            .nav-toggle:checked~.topbar .menu-button span::after {
+                transform: translateY(-6px) rotate(-45deg);
+            }
+
+            .hero {
+                padding: 22px 20px 24px;
+                min-height: 0;
+            }
+
+            .panel,
+            .card {
+                border-radius: 22px;
+            }
+
+            .panel {
+                padding: 24px 18px 20px;
+            }
+
+            .request-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .details-link {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .panel h2 {
+                font-size: 2.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">H</div>
+                HelpHub AI
+            </div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#" class="active">Explore</a>
+                <a href="#">Leader Board</a>
+                <a href="#">Notifications</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="eyebrow">Explore / Feed</div>
+            <h1>Browse help requests with filterable community context.</h1>
+            <p>Filter by category, urgency, skills, and location to surface the best matches.</p>
+        </section>
+
+        <main class="content">
+            <section class="panel">
+                <div class="eyebrow">Filters</div>
+                <h2>Refine the feed</h2>
+
+                <div class="filter-group">
+                    <label for="category">Category</label>
+                    <div class="select-wrap">
+                        <select id="category">
+                            <option>All categories</option>
+                            <option>Web Development</option>
+                            <option>Design</option>
+                            <option>Career</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="urgency">Urgency</label>
+                    <div class="select-wrap">
+                        <select id="urgency">
+                            <option>All urgency levels</option>
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="skills">Skills</label>
+                    <div class="input-wrap">
+                        <input id="skills" type="text" placeholder="React, Figma, Git/GitHub">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="location">Location</label>
+                    <div class="input-wrap">
+                        <input id="location" type="text" placeholder="Karachi, Lahore, Remote">
+                    </div>
+                </div>
+            </section>
+
+            <section class="feed">
+                <article class="card">
+                    <div class="pill-row">
+                        <span class="pill mint">Web Development</span>
+                        <span class="pill coral">High</span>
+                        <span class="pill mint">Solved</span>
+                    </div>
+                    <h3 class="request-title">Need help</h3>
+                    <p class="request-copy">help needed.</p>
+                    <div class="request-footer">
+                        <div class="person">
+                            <strong>Ayesha Khan</strong>
+                            <span>Karachi &bull; 1 helper interested</span>
+                        </div>
+                        <a class="details-link" href="#">Open details</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="pill-row">
+                        <span class="pill mint">Web Development</span>
+                        <span class="pill coral">High</span>
+                        <span class="pill mint">Solved</span>
+                    </div>
+                    <h3 class="request-title">Need help making my portfolio responsive before demo day</h3>
+                    <p class="request-copy">My HTML/CSS portfolio breaks on tablets and I need layout guidance before
+                        tomorrow evening.</p>
+                    <div class="pill-row">
+                        <span class="pill mint">HTML/CSS</span>
+                        <span class="pill mint">Responsive</span>
+                        <span class="pill mint">Portfolio</span>
+                    </div>
+                    <div class="request-footer">
+                        <div class="person">
+                            <strong>Sara Noor</strong>
+                            <span>Karachi &bull; 1 helper interested</span>
+                        </div>
+                        <a class="details-link" href="#">Open details</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="pill-row">
+                        <span class="pill gold">Design</span>
+                        <span class="pill gold">Medium</span>
+                        <span class="pill mint">Open</span>
+                    </div>
+                    <h3 class="request-title">Looking for Figma feedback on a volunteer event poster</h3>
+                    <p class="request-copy">I have a draft poster for a campus community event and want sharper
+                        hierarchy, spacing, and CTA copy.</p>
+                    <div class="pill-row">
+                        <span class="pill mint">Figma</span>
+                        <span class="pill mint">Poster</span>
+                        <span class="pill mint">Design Review</span>
+                    </div>
+                    <div class="request-footer">
+                        <div class="person">
+                            <strong>Ayesha Khan</strong>
+                            <span>Lahore &bull; 1 helper interested</span>
+                        </div>
+                        <a class="details-link" href="#">Open details</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="pill-row">
+                        <span class="pill mint">Career</span>
+                        <span class="pill mint">Low</span>
+                        <span class="pill mint">Solved</span>
+                    </div>
+                    <h3 class="request-title">Need mock interview support for internship applications</h3>
+                    <p class="request-copy">Applying to frontend internships and need someone to practice behavioral and
+                        technical interview questions with me.</p>
+                    <div class="pill-row">
+                        <span class="pill mint">Interview Prep</span>
+                        <span class="pill mint">Career</span>
+                        <span class="pill mint">Frontend</span>
+                    </div>
+                    <div class="request-footer">
+                        <div class="person">
+                            <strong>Sara Noor</strong>
+                            <span>Remote &bull; 2 helpers interested</span>
+                        </div>
+                        <a class="details-link" href="#">Open details</a>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
