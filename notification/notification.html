@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpHub AI - Notifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #fdf6ec;
+            background: linear-gradient(135deg, #fdf6ec 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            color: #1f2937;
+            padding-bottom: 60px;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 12%;
+            max-width: 100%;
+            background-color: #f8f1e8d6;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #111827;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #0d9488;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a.active {
+            background-color: #d8efe8b3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #065f46;
+        }
+
+        /* Mobile Hamburger Logic */
+        .menu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #374151;
+            border-radius: 2px;
+        }
+
+
+
+        /* Header Card */
+        .header-container {
+            max-width: 989px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #1f2937;
+            border-radius: 28px;
+            padding: 45px 50px;
+            color: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h4 {
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 1.2px;
+            margin-bottom: 15px;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* Notification Feed */
+        .feed-container {
+            max-width: 989px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .feed-card {
+            background-color: #fffaf5;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .feed-label {
+            color: #0d9488;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .feed-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #111827;
+            font-weight: 700;
+        }
+
+        /* Notification Item */
+        .notif-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .notif-item:last-child {
+            border-bottom: none;
+        }
+
+        .notif-content h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .notif-meta {
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        .btn-status {
+            background: white;
+            border: 1px solid #f3f4f6;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #111827;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-status:hover {
+            background: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                flex-direction: column;
+                z-index: 100;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .menu-toggle:checked~.nav-links {
+                display: flex;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            header {
+                padding: 30px;
+            }
+
+            .feed-card {
+                padding: 25px;
+            }
+
+            .feed-card h2 {
+                font-size: 1.8rem;
+            }
+
+            .notif-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .btn-status {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">H</div>
+            HelpHub AI
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-links">
+            <a href="/index.html">Dashboard</a>
+            <a href="#">Explore</a>
+            <a href="#" class="active">Notification</a>
+        </div>
+    </nav>
+
+    <div class="header-container">
+        <header>
+            <h4>Notifications</h4>
+            <h1>Stay updated on requests, helpers, and trust signals.</h1>
+        </header>
+    </div>
+
+    <div class="feed-container">
+        <section class="feed-card">
+            <span class="feed-label">Live Updates</span>
+            <h2>Notification feed</h2>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>"Need help" was marked as solved</h3>
+                    <div class="notif-meta">Status • Just now</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>Ayesha Khan offered help on "Need help"</h3>
+                    <div class="notif-meta">Match • Just now</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>Your request "Need help" is now live in the community feed</h3>
+                    <div class="notif-meta">Request • Just now</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>"Need help making my portfolio responsive before demo day" was marked as solved</h3>
+                    <div class="notif-meta">Status • Just now</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>"Need help making my portfolio responsive before demo day" was marked as solved</h3>
+                    <div class="notif-meta">Status • Just now</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>New helper matched to your responsive portfolio request</h3>
+                    <div class="notif-meta">Match • 12 min ago</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content">
+                    <h3>Your trust score increased after a solved request</h3>
+                    <div class="notif-meta">Reputation • 1 hr ago</div>
+                </div>
+                <button class="btn-status">Unread</button>
+            </div>
+
+            <div class="notif-item">
+                <div class="notif-content" style="opacity: 0.6;">
+                    <h3>AI Center detected rising demand for interview prep</h3>
+                    <div class="notif-meta">Insight • Today</div>
+                </div>
+                <button class="btn-status">Read</button>
+            </div>
+
+        </section>
+    </div>
+
+</body>
+
+</html>

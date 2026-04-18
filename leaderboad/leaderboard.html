@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6efe3;
+            --bg-soft: rgba(255, 249, 241, 0.72);
+            --panel: rgba(255, 251, 246, 0.88);
+            --surface: #fbf8f3;
+            --dark: #252c2f;
+            --text: #1b1e1f;
+            --muted: #7f817f;
+            --teal: #1b9d95;
+            --teal-soft: #d8ebe6;
+            --shadow: 0 22px 45px rgba(63, 51, 35, 0.12);
+            --radius-xl: 32px;
+            --radius-lg: 26px;
+            --radius-md: 20px;
+            --track: #ece9e2;
+            --border: rgba(202, 193, 178, 0.25);
+        }
+
+        /* Closest match used: Plus Jakarta Sans. The exact typeface in the wireframe is not fully identifiable from the image alone. */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(197, 226, 218, 0.68), transparent 28%),
+                radial-gradient(circle at top right, rgba(246, 213, 153, 0.5), transparent 24%),
+                linear-gradient(180deg, #f6f0e5 0%, #f5efe3 100%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 24px auto 48px;
+        }
+
+        .nav-shell {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 18px 28px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            background: rgba(253, 250, 244, 0.66);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 14px 30px rgba(93, 79, 56, 0.08);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #22b3a7 0%, #159a92 100%);
+            color: #f4fffb;
+            font-size: 0.92rem;
+            font-weight: 800;
+        }
+
+        .brand-name {
+            font-size: 1.02rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            padding: 12px 18px;
+            border-radius: 999px;
+            color: #6f746f;
+            font-size: 0.98rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .nav-link.is-active {
+            background: #dbeae3;
+            color: #458279;
+        }
+
+        .hero {
+            padding: 58px 56px 48px;
+            border-radius: 34px;
+            background: linear-gradient(180deg, #252c2f 0%, #293033 100%);
+            color: #ffffff;
+            box-shadow: var(--shadow);
+        }
+
+        .eyebrow {
+            margin: 0 0 18px;
+            color: #e9ebe7;
+            font-size: 0.92rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 920px;
+            margin: 0;
+            font-size: clamp(2.7rem, 5.4vw, 4.3rem);
+            font-weight: 800;
+            line-height: 0.99;
+            letter-spacing: -0.06em;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: 24px 0 0;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 1.18rem;
+            line-height: 1.45;
+            letter-spacing: -0.03em;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+        }
+
+        .panel {
+            padding: 34px 30px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius-xl);
+            background: rgba(251, 248, 243, 0.9);
+            box-shadow: var(--shadow);
+        }
+
+        .panel h2,
+        .panel-title {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 2.3rem);
+            font-weight: 800;
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+        }
+
+        .section-label {
+            margin: 0 0 18px;
+            color: #2f7674;
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .panel-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 26px;
+        }
+
+        .rank-card,
+        .badge-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 18px 18px 18px 20px;
+            border: 1px solid rgba(235, 231, 223, 0.9);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: 0 10px 18px rgba(88, 74, 47, 0.06);
+        }
+
+        .rank-left,
+        .badge-copy {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+
+        .avatar--teal {
+            background: linear-gradient(135deg, #27b0a6 0%, #1b9c95 100%);
+        }
+
+        .avatar--slate {
+            background: linear-gradient(135deg, #3a4d63 0%, #27394d 100%);
+        }
+
+        .avatar--orange {
+            background: linear-gradient(135deg, #ffa22d 0%, #ff7a6a 100%);
+            color: #252525;
+        }
+
+        .rank-copy,
+        .badge-text {
+            min-width: 0;
+        }
+
+        .rank-name,
+        .badge-name {
+            margin: 0;
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .rank-meta,
+        .badge-role {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            line-height: 1.35;
+            letter-spacing: -0.02em;
+        }
+
+        .rank-stats {
+            min-width: 126px;
+            text-align: right;
+        }
+
+        .rank-score {
+            margin: 0;
+            font-size: 1.85rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.06em;
+        }
+
+        .rank-count {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            line-height: 1.25;
+        }
+
+        .badge-card {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+            padding: 22px 22px 20px;
+        }
+
+        .badge-copy {
+            gap: 0;
+        }
+
+        .progress-track {
+            height: 10px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: var(--track);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #ffb000 0%, #259f95 100%);
+        }
+
+        .fill-92 {
+            width: 96%;
+        }
+
+        .fill-86 {
+            width: 86%;
+        }
+
+        .fill-74 {
+            width: 74%;
+        }
+
+        .fill-68 {
+            width: 68%;
+        }
+
+        @media (max-width: 1023px) {
+            .page {
+                width: min(100% - 28px, 960px);
+                margin-top: 18px;
+            }
+
+            .hero {
+                padding: 48px 40px 40px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page {
+                width: calc(100% - 20px);
+                margin-bottom: 28px;
+            }
+
+            .nav-shell {
+                padding: 16px 18px;
+                border-radius: 24px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .brand {
+                justify-content: flex-start;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+                gap: 8px;
+            }
+
+            .nav-link {
+                padding: 10px 14px;
+                font-size: 0.92rem;
+            }
+
+            .hero {
+                padding: 34px 22px 30px;
+                border-radius: 28px;
+            }
+
+            .eyebrow {
+                margin-bottom: 14px;
+                font-size: 0.78rem;
+            }
+
+            .hero p {
+                margin-top: 18px;
+                font-size: 1rem;
+            }
+
+            .panel {
+                padding: 26px 18px 18px;
+                border-radius: 26px;
+            }
+
+            .panel-stack {
+                gap: 14px;
+            }
+
+            .rank-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .rank-stats {
+                min-width: 0;
+                width: 100%;
+                text-align: left;
+            }
+
+            .rank-score {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <nav class="nav-shell" aria-label="Primary">
+            <a class="brand" href="#">
+                <span class="brand-mark" aria-hidden="true">H</span>
+                <span class="brand-name">HelpHub AI</span>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link" href="/index.html">Dashboard</a>
+                <a class="nav-link" href="#">Explore</a>
+                <a class="nav-link is-active" href="#" aria-current="page">Leaderboard</a>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <p class="eyebrow">Leaderboard</p>
+            <h1>Recognize the people who keep the community moving.</h1>
+            <p>Trust score, contribution count, and badges create visible momentum for reliable helpers.</p>
+        </header>
+
+        <main class="content-grid">
+            <section class="panel" aria-labelledby="top-helpers-title">
+                <p class="section-label">Top Helpers</p>
+                <h2 id="top-helpers-title">Rankings</h2>
+
+                <div class="panel-stack">
+                    <article class="rank-card">
+                        <div class="rank-left">
+                            <div class="avatar avatar--teal" aria-hidden="true">H</div>
+                            <div class="rank-copy">
+                                <h3 class="rank-name">#1 Hamza Imran</h3>
+                                <p class="rank-meta">Community Guide, Trusted Responses</p>
+                            </div>
+                        </div>
+                        <div class="rank-stats">
+                            <p class="rank-score">96%</p>
+                            <p class="rank-count">31 contributions</p>
+                        </div>
+                    </article>
+
+                    <article class="rank-card">
+                        <div class="rank-left">
+                            <div class="avatar avatar--slate" aria-hidden="true">HA</div>
+                            <div class="rank-copy">
+                                <h3 class="rank-name">#2 Hassan Ali</h3>
+                                <p class="rank-meta">JavaScript, React, Git/GitHub</p>
+                            </div>
+                        </div>
+                        <div class="rank-stats">
+                            <p class="rank-score">88%</p>
+                            <p class="rank-count">24 contributions</p>
+                        </div>
+                    </article>
+
+                    <article class="rank-card">
+                        <div class="rank-left">
+                            <div class="avatar avatar--orange" aria-hidden="true">SN</div>
+                            <div class="rank-copy">
+                                <h3 class="rank-name">#3 Sara Noor</h3>
+                                <p class="rank-meta">Python, Data Analysis</p>
+                            </div>
+                        </div>
+                        <div class="rank-stats">
+                            <p class="rank-score">74%</p>
+                            <p class="rank-count">11 contributions</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel" aria-labelledby="badge-system-title">
+                <p class="section-label">Badge System</p>
+                <h2 id="badge-system-title">Trust and achievement</h2>
+
+                <div class="panel-stack">
+                    <article class="badge-card">
+                        <div class="badge-copy">
+                            <div class="badge-text">
+                                <h3 class="badge-name">Hamza Imran</h3>
+                                <p class="badge-role">Lead helper &bull; Community guide</p>
+                            </div>
+                        </div>
+                        <div class="progress-track" aria-hidden="true">
+                            <div class="progress-fill fill-92"></div>
+                        </div>
+                    </article>
+
+                    <article class="badge-card">
+                        <div class="badge-copy">
+                            <div class="badge-text">
+                                <h3 class="badge-name">Hassan Ali</h3>
+                                <p class="badge-role">Code Rescuer &bull; Bug Hunter</p>
+                            </div>
+                        </div>
+                        <div class="progress-track" aria-hidden="true">
+                            <div class="progress-fill fill-86"></div>
+                        </div>
+                    </article>
+
+                    <article class="badge-card">
+                        <div class="badge-copy">
+                            <div class="badge-text">
+                                <h3 class="badge-name">Sara Noor</h3>
+                                <p class="badge-role">Community Voice</p>
+                            </div>
+                        </div>
+                        <div class="progress-track" aria-hidden="true">
+                            <div class="progress-fill fill-68"></div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
