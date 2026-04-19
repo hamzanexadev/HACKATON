@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpHub AI</title>
+    <title>HelpHub AI - Home Centre</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
     <style>
         :root {
             --bg: #f6f0e7;
@@ -47,7 +50,7 @@
                 linear-gradient(180deg, #f7f2e9 0%, #f6efe5 100%);
         }
 
-        body.nav-open {
+        body.menu-open {
             overflow: hidden;
         }
 
@@ -90,21 +93,21 @@
         }
 
         .topbar {
-            width: min(1100px, calc(100% - 36px));
+            width: min(963px, calc(100% - 36px));
             margin: 0 auto;
             min-height: 78px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 24px;
+            gap: 189px;
         }
 
         .brand {
             display: flex;
             align-items: center;
+            margin: 0px 0px 0px -64px;
             gap: 12px;
             flex-shrink: 0;
-            margin-left: 0;
         }
 
         .brand-mark {
@@ -139,7 +142,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
             flex-wrap: nowrap;
             min-width: 0;
         }
@@ -166,6 +168,7 @@
         .actions {
             display: flex;
             align-items: center;
+            margin: 0px 15px;
             gap: 10px;
             flex-shrink: 0;
         }
@@ -350,18 +353,18 @@
         }
 
         .signal-pill {
-            min-height: 42px;
-            padding: 0 18px;
+            min-height: 39px;
+            padding: 0 11px;
             background: rgba(255, 252, 247, 0.94);
             border: 1px solid rgba(24, 31, 28, 0.04);
             box-shadow: 0 8px 18px rgba(149, 123, 68, 0.08);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 700;
         }
 
         .button {
-            min-height: 46px;
-            padding: 0 21px;
+            min-height: 37px;
+            padding: 0 10px;
             border: 0;
             cursor: pointer;
             font: inherit;
@@ -380,20 +383,7 @@
             color: #ffffff;
             background: linear-gradient(180deg, #22beb0 0%, #18a295 100%);
             box-shadow: 0 18px 28px rgba(29, 177, 163, 0.26);
-            min-height: 46px;
-            padding: 0 21px;
-            border: 0;
-            cursor: pointer;
-            font: inherit;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-pill);
-            white-space: nowrap;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            margin-right: -5pc;
         }
 
         .button-secondary,
@@ -404,6 +394,7 @@
             border: 1px solid rgba(24, 31, 28, 0.04);
             min-height: 46px;
             padding: 0 21px;
+            border: 0;
             cursor: pointer;
             font: inherit;
             font-size: 15px;
@@ -798,6 +789,7 @@
         }
 
         @media (max-width: 820px) {
+
             .page,
             .topbar {
                 width: min(100% - 26px, 1100px);
@@ -827,6 +819,7 @@
         }
 
         @media (max-width: 620px) {
+
             .page,
             .topbar {
                 width: min(100% - 22px, 1100px);
@@ -884,6 +877,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="topbar-wrap">
         <header class="topbar">
@@ -895,14 +889,11 @@
             <div class="desktop-nav">
                 <nav class="nav" aria-label="Primary">
                     <a class="active" href="./index.html">Home</a>
-                    <a href="./explore/explore.html">Explore</a>
-                    <a href="./leaderboad/leaderboard.html">Leaderboard</a>
-                    <a href="./AIcenter/aicenter.html">AICenter</a>
-                    <a href="./notification/notification.html">Notifications</a>
-                    <a href="./request/request.html">Request</a>
-                    <a href="./messages/message.html">Messages</a>
-                    <a href="./proflie/profile.html">Profile</a>
-                    <a href="./login/login.html">Login</a>
+                    <a href="./explore.html">Explore</a>
+                    <a href="./ai-centre.html">AICenter</a>
+                    <a href="./create-request.html">Request</a>
+                    <a href="./profile.html">Profile</a>
+                    <a href="./login.html">Login</a>
                 </nav>
 
                 <div class="actions">
@@ -911,7 +902,8 @@
                 </div>
             </div>
 
-            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-drawer">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -933,7 +925,9 @@
         <nav class="mobile-nav" aria-label="Mobile Primary">
             <a class="active" href="./index.html">Home</a>
             <a href="#">Explore</a>
+            <a href="./leaderboad/leaderboard.html">Leaderboard</a>
             <a href="#">AICenter</a>
+            <a href="#">Notifications</a>
             <a href="./request/request.html">Request</a>
             <a href="./proflie/profile.html">Profile</a>
         </nav>
@@ -956,7 +950,7 @@
 
                 <div class="hero-actions">
                     <a class="button button-primary" href="#">Open product demo</a>
-                    <a class="button button-secondary" href="#">Post a request</a>
+                    <a class=" button-secondary" href="#">Post a request</a>
                 </div>
 
                 <div class="hero-stats">
@@ -1018,19 +1012,22 @@
                     <article class="flow-card">
                         <h3>Ask for help clearly</h3>
                         <p class="flow-copy">
-                            Create structured requests with category, urgency, AI suggestions, and tags that attract the right people.
+                            Create structured requests with category, urgency, AI suggestions, and tags that attract the
+                            right people.
                         </p>
                     </article>
                     <article class="flow-card">
                         <h3>Discover the right people</h3>
                         <p class="flow-copy">
-                            Use the explore feed, helper lists, notifications, and messaging to move quickly once a match happens.
+                            Use the explore feed, helper lists, notifications, and messaging to move quickly once a
+                            match happens.
                         </p>
                     </article>
                     <article class="flow-card">
                         <h3>Track real contribution</h3>
                         <p class="flow-copy">
-                            Trust scores, badges, solved requests, and rankings help the community recognize meaningful support.
+                            Trust scores, badges, solved requests, and rankings help the community recognize meaningful
+                            support.
                         </p>
                     </article>
                 </div>
@@ -1095,7 +1092,8 @@
                         </div>
                         <h3>Looking for Figma feedback on a volunteer event poster</h3>
                         <p class="request-copy">
-                            I have a draft poster for a campus community event and want sharper hierarchy, spacing, and CTA copy.
+                            I have a draft poster for a campus community event and want sharper hierarchy, spacing, and
+                            CTA copy.
                         </p>
                         <div class="request-keywords">
                             <span class="tag">Figma</span>
@@ -1112,7 +1110,7 @@
                     </article>
                 </div>
 
-               
+
             </section>
         </main>
     </div>
@@ -1185,4 +1183,5 @@
         });
     </script>
 </body>
+
 </html>
