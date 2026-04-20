@@ -10,96 +10,385 @@
     <link rel="shortcut icon" href="./image.png" type="image/x-icon">
     <style>
         :root {
-            --teal: #0d9488;
-            --ink: #111827;
-            --muted: #6b7280;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --bg: #f6f0e7;
+            --surface: rgba(255, 250, 246, 0.88);
+            --surface-solid: #fff9f3;
+            --surface-deep: #113a35;
+            --ink: #17181b;
+            --muted: #68665f;
+            --line: rgba(30, 36, 33, 0.06);
+            --teal: #1db1a3;
+            --teal-deep: #159489;
+            --pill: #f5f5ef;
+            --shadow: 0 24px 42px rgba(167, 143, 91, 0.14);
+            --shadow-soft: 0 18px 32px rgba(167, 143, 91, 0.1);
+            --radius-xl: 30px;
+            --radius-lg: 22px;
+            --radius-md: 18px;
+            --radius-pill: 999px;
         }
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: "Plus Jakarta Sans", sans-serif;
+            margin: 0;
+            min-width: 320px;
+            font-family: "Manrope", sans-serif;
             color: var(--ink);
             background:
-                radial-gradient(circle at top left, rgba(195, 239, 220, 0.75), transparent 29%),
-                radial-gradient(circle at top right, rgba(255, 226, 182, 0.5), transparent 32%),
-                linear-gradient(180deg, #faf6ee 0%, #f6f1e6 100%);
-            min-height: 100vh;
+                radial-gradient(circle at 7% 12%, rgba(198, 239, 224, 0.68), transparent 26%),
+                radial-gradient(circle at 83% 15%, rgba(255, 223, 130, 0.26), transparent 14%),
+                radial-gradient(circle at 30% 82%, rgba(255, 237, 197, 0.42), transparent 24%),
+                linear-gradient(180deg, #f7f2e9 0%, #f6efe5 100%);
         }
 
-        /* --- Navbar --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.7), transparent 24%),
+                radial-gradient(circle at 76% 84%, rgba(244, 210, 122, 0.18), transparent 20%);
+            opacity: 0.9;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .page {
             position: relative;
-            z-index: 1000;
+            z-index: 1;
+            width: min(1100px, calc(100% - 36px));
+            margin: 0 auto;
+            padding-bottom: 34px;
         }
 
-        .logo {
+        .topbar-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(20px);
+            background: rgba(248, 241, 232, 0.82);
+            border-bottom: 1px solid rgba(29, 37, 33, 0.05);
+        }
+
+        .topbar {
+            width: min(963px, calc(100% - 36px));
+            margin: 0 auto;
+            min-height: 78px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            justify-content: space-between;
+            gap: 189px;
         }
 
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background-color: var(--teal);
-            color: white;
+        .brand {
+            display: flex;
+            align-items: center;
+            margin: 0px 0px 0px -64px;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #1eb9aa 0%, #13978b 100%);
+            box-shadow: 0 14px 24px rgba(22, 158, 143, 0.25);
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .nav {
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--muted);
-            font-size: 0.9rem;
+        .nav a {
+            padding: 11px 15px;
+            border-radius: 999px;
+            color: rgba(23, 24, 27, 0.82);
+            font-size: 14px;
             font-weight: 500;
-            transition: 0.3s;
+            letter-spacing: -0.02em;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .nav-links a.active {
-            background-color: #d8efe8;
-            padding: 8px 16px;
-            border-radius: 20px;
-            color: #065f46;
+        .nav a:hover {
+            background: rgba(255, 252, 247, 0.92);
         }
 
-        /* Hamburger Styles */
-        .menu-toggle { display: none; }
-        
-        .hamburger {
+        .nav a.active {
+            background: rgba(216, 239, 232, 0.7);
+            box-shadow: inset 0 0 0 1px rgba(25, 133, 121, 0.05);
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            margin: 0px 15px;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .menu-toggle,
+        .mobile-close {
             display: none;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            border: 1px solid rgba(24, 31, 28, 0.06);
+            border-radius: 16px;
+            background: rgba(255, 252, 247, 0.96);
+            box-shadow: 0 12px 22px rgba(149, 123, 68, 0.1);
             cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background-color: #374151;
-            border-radius: 2px;
-            transition: 0.3s ease;
+        .menu-toggle:hover,
+        .mobile-close:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 28px rgba(149, 123, 68, 0.14);
+        }
+
+        .menu-toggle span,
+        .mobile-close span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin: 4px auto;
+            border-radius: 999px;
+            background: var(--ink);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .mobile-drawer .mobile-close {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .mobile-close span:first-child {
+            transform: translateY(3px) rotate(45deg);
+        }
+
+        .mobile-close span:last-child {
+            transform: translateY(-3px) rotate(-45deg);
+        }
+
+        .mobile-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(11, 18, 17, 0.32);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.24s ease, visibility 0.24s ease;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            z-index: 70;
+            width: min(372px, calc(100vw - 28px));
+            max-height: calc(100vh - 28px);
+            overflow: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            padding: 18px;
+            border: 1px solid rgba(24, 31, 28, 0.08);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255, 251, 246, 0.99) 0%, rgba(249, 243, 235, 0.97) 100%);
+            box-shadow: 0 28px 54px rgba(111, 84, 36, 0.22);
+            transform: translateX(calc(100% + 24px));
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.26s ease, opacity 0.26s ease, visibility 0.26s ease;
+        }
+
+        body.nav-open .mobile-backdrop {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        body.nav-open .mobile-drawer {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        body.nav-open .menu-toggle span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        body.nav-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.nav-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .mobile-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .mobile-drawer-kicker {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: rgba(216, 239, 232, 0.7);
+            color: #1d6c62;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .mobile-nav {
+            display: grid;
+            gap: 8px;
+        }
+
+        .mobile-nav a {
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-radius: 18px;
+            background: rgba(255, 252, 247, 0.86);
+            box-shadow: inset 0 0 0 1px rgba(24, 31, 28, 0.05);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .mobile-nav a:hover {
+            transform: translateX(2px);
+        }
+
+        .mobile-nav a.active {
+            background: rgba(214, 238, 229, 0.78);
+        }
+
+        .mobile-actions {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(24, 31, 28, 0.06);
+        }
+
+        .mobile-actions .signal-pill,
+        .mobile-actions .button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .signal-pill,
+        .button,
+        .small-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .signal-pill {
+            min-height: 39px;
+            padding: 0 11px;
+            background: rgba(255, 252, 247, 0.94);
+            border: 1px solid rgba(24, 31, 28, 0.04);
+            box-shadow: 0 8px 18px rgba(149, 123, 68, 0.08);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .button {
+            min-height: 37px;
+            padding: 0 10px;
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .button:hover,
+        .signal-pill:hover,
+        .small-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            color: #ffffff;
+            background: linear-gradient(180deg, #22beb0 0%, #18a295 100%);
+            box-shadow: 0 18px 28px rgba(29, 177, 163, 0.26);
+        }
+
+        .button-secondary,
+        .small-pill {
+            color: var(--ink);
+            background: rgba(255, 252, 247, 0.96);
+            box-shadow: 0 12px 22px rgba(169, 144, 92, 0.12);
+            border: 1px solid rgba(24, 31, 28, 0.04);
         }
 
         /* --- Hero Section --- */
@@ -182,41 +471,28 @@
             margin-right: 5px;
         }
 
-        /* --- RESPONSIVE DESIGN (TOP DROPDOWN) --- */
+        /* --- RESPONSIVE DESIGN --- */
 
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
+        @media (max-width: 1080px) {
+            .topbar {
+                gap: 16px;
+            }
 
-            .nav-links {
-                position: absolute;
-                top: 80px; /* Navbar ke bilkul niche */
-                left: 20px;
-                right: 20px;
-                background: white;
+            .desktop-nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
                 flex-direction: column;
-                padding: 20px;
-                border-radius: 20px;
-                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-                
-                /* Hide Logic */
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-20px);
-                transition: 0.3s ease;
-                z-index: 999;
+                flex-shrink: 0;
             }
 
-            /* Jab checkbox check ho (Menu Open) */
-            #menu-toggle:checked ~ .nav-links {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
+            .brand {
+                margin: 0px 0px 0px 0px;
             }
-
-            /* Hamburger to X Animation */
-            #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-            #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -225,33 +501,82 @@
             .hero h1 { font-size: 2.2rem; }
         }
 
-        @media (max-width: 1024px) and (min-width: 769px) {
+        @media (max-width: 820px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 620px) {
+            .mobile-drawer {
+                top: 10px;
+                right: 10px;
+                width: calc(100vw - 20px);
+                max-height: calc(100vh - 20px);
+                padding: 16px;
+                border-radius: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="topbar-wrap">
+        <header class="topbar">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark">H</span>
+                <span class="brand-name">HelpHub AI</span>
+            </a>
 
-    <nav>
-        <div class="logo">
-            <div class="logo-icon">H</div>
-            HelpHub AI
+            <div class="desktop-nav">
+                <nav class="nav" aria-label="Primary">
+                    <a href="../index.html">Home</a>
+                    <a href="../explore/explore.html">Explore</a>
+                    <a class="active" href="./aicenter.html">AICenter</a>
+                    <a href="../request/request.html">Request</a>
+                    <a href="../proflie/profile.html">Profile</a>
+                    <a href="../login/login.html">Login</a>
+                </nav>
+
+                <div class="actions">
+                    <a class="signal-pill" href="#">Live community signals</a>
+                    <a class="button button-primary" href="#">Join the platform</a>
+                </div>
+            </div>
+
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-drawer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+    </div>
+
+    <div class="mobile-backdrop"></div>
+
+    <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true" aria-label="Mobile navigation">
+        <div class="mobile-drawer-header">
+            <span class="mobile-drawer-kicker">Navigation</span>
+            <button class="mobile-close" type="button" aria-label="Close navigation menu">
+                <span></span>
+                <span></span>
+            </button>
         </div>
 
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
-        <label for="menu-toggle" class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
+        <nav class="mobile-nav" aria-label="Mobile Primary">
+            <a href="../index.html">Home</a>
+            <a href="../explore/explore.html">Explore</a>
+            <a href="../leaderboad/leaderboard.html">Leaderboard</a>
+            <a class="active" href="./aicenter.html">AICenter</a>
+            <a href="../notification/notification.html">Notifications</a>
+            <a href="../request/request.html">Request</a>
+            <a href="../proflie/profile.html">Profile</a>
+        </nav>
 
-        <div class="nav-links">
-            <a href="/index.html">Dashboard</a>
-            <a href="/request/request.html">Create Request</a>
-            <a href="#" class="active">AI Center</a>
+        <div class="mobile-actions">
+            <a class="signal-pill" href="#">Live community signals</a>
+            <a class="button button-primary" href="#">Join the platform</a>
         </div>
-    </nav>
+    </aside>
 
     <header class="hero">
         <span class="eyebrow">AI Center</span>
@@ -298,6 +623,73 @@
         </div>
     </section>
 
+    <script>
+        const body = document.body;
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mobileClose = document.querySelector(".mobile-close");
+        const mobileBackdrop = document.querySelector(".mobile-backdrop");
+        const mobileDrawer = document.querySelector(".mobile-drawer");
+        const mobileLinks = document.querySelectorAll(".mobile-nav a");
+        const mobileBreakpoint = 1080;
+
+        const syncMenuState = (isOpen) => {
+            if (!menuToggle || !mobileDrawer) {
+                return;
+            }
+
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
+            body.classList.toggle("nav-open", isOpen);
+        };
+
+        const closeMenu = () => {
+            syncMenuState(false);
+        };
+
+        const openMenu = () => {
+            if (window.innerWidth > mobileBreakpoint) {
+                return;
+            }
+
+            syncMenuState(true);
+        };
+
+        if (menuToggle && mobileDrawer) {
+            syncMenuState(false);
+
+            menuToggle.addEventListener("click", () => {
+                if (body.classList.contains("nav-open")) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+        }
+
+        if (mobileClose) {
+            mobileClose.addEventListener("click", closeMenu);
+        }
+
+        if (mobileBackdrop) {
+            mobileBackdrop.addEventListener("click", closeMenu);
+        }
+
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > mobileBreakpoint) {
+                closeMenu();
+            }
+        });
+    </script>
 </body>
 
 </html>

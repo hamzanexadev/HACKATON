@@ -1,1019 +1,962 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Request | HelpHub AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
     <style>
-      :root {
-        --page-bg: #f7f3eb;
-        --page-bg-soft: #fbf8f2;
-        --card-bg: #fffdf9;
-        --hero-bg: #283032;
-        --text-strong: #18181a;
-        --text-body: #696560;
-        --text-soft: #8f8a82;
-        --border-soft: rgba(28, 26, 22, 0.07);
-        --border-strong: rgba(28, 26, 22, 0.11);
-        --brand: #1fb3a5;
-        --brand-deep: #14998d;
-        --brand-soft: rgba(31, 179, 165, 0.11);
-        --surface-shadow: 0 24px 56px rgba(158, 140, 102, 0.09);
-        --card-shadow: 0 20px 42px rgba(156, 139, 104, 0.08);
-        --radius-xl: 2rem;
-        --radius-lg: 1.75rem;
-        --radius-md: 1.2rem;
-        --container-width: 77.5rem;
-        --nav-height: 5.25rem;
-        --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
-        font-family: "Manrope", "Segoe UI", "Aptos", system-ui, -apple-system, BlinkMacSystemFont,
-          sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        color: var(--text-strong);
-        font-family: "Manrope", "Segoe UI", "Aptos", system-ui, -apple-system, BlinkMacSystemFont,
-          sans-serif;
-        text-rendering: optimizeLegibility;
-        background:
-          radial-gradient(circle at 6% 18%, rgba(194, 235, 220, 0.68), transparent 18rem),
-          radial-gradient(circle at 97% 22%, rgba(253, 226, 190, 0.58), transparent 16rem),
-          linear-gradient(180deg, #fbf9f3 0%, var(--page-bg) 100%);
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: auto;
-        border-radius: 999px;
-        pointer-events: none;
-        filter: blur(68px);
-        opacity: 0.35;
-        z-index: 0;
-      }
-
-      body::before {
-        width: 16rem;
-        height: 16rem;
-        left: 2.5rem;
-        bottom: 6rem;
-        background: rgba(212, 239, 227, 0.9);
-      }
-
-      body::after {
-        width: 18rem;
-        height: 18rem;
-        right: 2.5rem;
-        top: 6rem;
-        background: rgba(255, 232, 204, 0.82);
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      button,
-      input,
-      select,
-      textarea {
-        font: inherit;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      :focus-visible {
-        outline: 3px solid rgba(31, 179, 165, 0.3);
-        outline-offset: 2px;
-      }
-
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        border-bottom: 1px solid rgba(44, 38, 29, 0.05);
-        background: rgba(250, 247, 240, 0.8);
-        backdrop-filter: blur(18px);
-      }
-
-      .header-inner,
-      .page-shell {
-        width: min(calc(100% - 2rem), var(--container-width));
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-      }
-
-      .header-inner {
-        min-height: var(--nav-height);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.85rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
-
-      .brand-mark {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 1rem;
-        display: grid;
-        place-items: center;
-        color: #f8fffd;
-        font-weight: 800;
-        font-size: 1.15rem;
-        background: linear-gradient(145deg, #1fb3a5, #16998d);
-        box-shadow: 0 16px 28px rgba(31, 179, 165, 0.25);
-      }
-
-      .brand-name {
-        font-size: 1.46rem;
-      }
-
-      .nav-desktop {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .nav-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 2.9rem;
-        padding: 0 1rem;
-        border-radius: 999px;
-        color: #5d5b57;
-        font-size: 1.02rem;
-        font-weight: 500;
-        transition:
-          background-color var(--ease),
-          color var(--ease),
-          transform var(--ease);
-      }
-
-      .nav-link:hover {
-        color: var(--text-strong);
-        background: rgba(28, 26, 22, 0.045);
-      }
-
-      .nav-link.active {
-        color: #377f76;
-        background: rgba(31, 179, 165, 0.13);
-      }
-
-      .nav-toggle {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 3rem;
-        height: 3rem;
-        padding: 0;
-        border: 1px solid rgba(28, 26, 22, 0.08);
-        border-radius: 1rem;
-        background: rgba(255, 253, 248, 0.88);
-        box-shadow: 0 12px 24px rgba(121, 108, 76, 0.08);
-        transition:
-          background-color var(--ease),
-          transform var(--ease),
-          box-shadow var(--ease);
-      }
-
-      .nav-toggle:hover {
-        background: #fffdf9;
-        transform: translateY(-1px);
-      }
-
-      .nav-toggle-line {
-        position: absolute;
-        width: 1.15rem;
-        height: 2px;
-        border-radius: 999px;
-        background: #222322;
-        transition:
-          transform var(--ease),
-          opacity var(--ease);
-      }
-
-      .nav-toggle-line:nth-child(1) {
-        transform: translateY(-5px);
-      }
-
-      .nav-toggle-line:nth-child(3) {
-        transform: translateY(5px);
-      }
-
-      .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(1) {
-        transform: rotate(45deg);
-      }
-
-      .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(2) {
-        opacity: 0;
-      }
-
-      .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3) {
-        transform: rotate(-45deg);
-      }
-
-      .mobile-nav {
-        position: fixed;
-        inset: 0;
-        z-index: 30;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        padding: 0.35rem 0.35rem 0;
-        visibility: hidden;
-        pointer-events: none;
-      }
-
-      .mobile-nav.is-open {
-        visibility: visible;
-        pointer-events: auto;
-      }
-
-      .mobile-nav-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(20, 19, 17, 0.35);
-        opacity: 0;
-        transition: opacity var(--ease);
-      }
-
-      .mobile-nav.is-open .mobile-nav-backdrop {
-        opacity: 1;
-      }
-
-      .mobile-nav-panel {
-        position: relative;
-        width: min(calc(100% - 0.25rem), 28rem);
-        min-height: calc(50dvh - 0.35rem);
-        padding: 1.3rem 0.7rem 0.8rem;
-        border-radius: 2rem 2rem 0 0;
-        background:
-          radial-gradient(circle at 86% 9%, rgba(253, 233, 206, 0.58), transparent 10rem),
-          linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(249, 244, 236, 0.98));
-        backdrop-filter: blur(24px);
-        box-shadow:
-          0 30px 70px rgba(53, 43, 23, 0.16),
-          inset 0 1px 0 rgba(255, 255, 255, 0.72);
-        transform: translateY(-1.4rem) scale(0.985);
-        opacity: 0;
-        transition:
-          transform var(--ease),
-          opacity var(--ease);
-        display: flex;
-        flex-direction: column;
-        gap: 1.15rem;
-        overflow-y: auto;
-      }
-
-      .mobile-nav.is-open .mobile-nav-panel {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-
-      .mobile-nav-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.2rem 0.2rem 0.35rem;
-      }
-
-      .mobile-nav-tag {
-        display: inline-flex;
-        align-items: center;
-        min-height: 2.65rem;
-        padding: 0 1.1rem;
-        border-radius: 999px;
-        color: #257d75;
-        font-size: 0.97rem;
-        font-weight: 800;
-        letter-spacing: 0.22em;
-        background: rgba(215, 239, 232, 0.9);
-      }
-
-      .mobile-nav-close {
-        position: relative;
-        width: 3.6rem;
-        height: 3.6rem;
-        border: 1px solid rgba(28, 26, 22, 0.06);
-        border-radius: 1.25rem;
-        background: #fffdf9;
-        box-shadow: 0 16px 28px rgba(121, 108, 76, 0.08);
-      }
-
-      .mobile-nav-close-line {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 1.3rem;
-        height: 2px;
-        border-radius: 999px;
-        background: #262728;
-      }
-
-      .mobile-nav-close-line:first-child {
-        transform: translate(-68%, -50%) rotate(45deg);
-      }
-
-      .mobile-nav-close-line:last-child {
-        transform: translate(-32%, -50%) rotate(-45deg);
-      }
-
-      .mobile-nav-links {
-        display: grid;
-        gap: 0.8rem;
-        padding-top: 0.65rem;
-      }
-
-      .mobile-nav-links .nav-link {
-        justify-content: flex-start;
-        min-height: 4.2rem;
-        padding: 0 1.2rem;
-        border: 1px solid rgba(28, 26, 22, 0.055);
-        border-radius: 1.5rem;
-        background: rgba(255, 255, 255, 0.75);
-        color: #232427;
-        font-size: 1.12rem;
-        font-weight: 700;
-        box-shadow: 0 12px 20px rgba(121, 108, 76, 0.05);
-      }
-
-      .mobile-nav-links .nav-link.active {
-        background: linear-gradient(180deg, rgba(215, 239, 232, 0.98), rgba(213, 237, 230, 0.9));
-        border-color: rgba(31, 179, 165, 0.12);
-      }
-
-      .mobile-nav-actions {
-        margin-top: auto;
-        display: grid;
-        gap: 0.85rem;
-        padding: 0.65rem 0.1rem 0.25rem;
-      }
-
-      .mobile-nav-secondary,
-      .mobile-nav-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 3.75rem;
-        padding: 0 1.2rem;
-        border-radius: 999px;
-        font-size: 1.04rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        transition:
-          transform var(--ease),
-          box-shadow var(--ease);
-      }
-
-      .mobile-nav-secondary {
-        background: rgba(255, 255, 255, 0.94);
-        color: #232427;
-        box-shadow: 0 12px 22px rgba(121, 108, 76, 0.07);
-      }
-
-      .mobile-nav-primary {
-        background: linear-gradient(145deg, #29bdb0, #1eaa9d);
-        color: #f7fffd;
-        box-shadow: 0 18px 28px rgba(31, 179, 165, 0.24);
-      }
-
-      .mobile-nav-secondary:hover,
-      .mobile-nav-primary:hover {
-        transform: translateY(-1px);
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
-
-      .page-shell {
-        padding: 2rem 0 4rem;
-      }
-
-      .hero-card {
-        border-radius: 2rem;
-        padding: clamp(2rem, 4vw, 3.55rem);
-        background: linear-gradient(180deg, #293133 0%, #2a3234 100%);
-        box-shadow: var(--surface-shadow);
-        color: #f7f4ef;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        font-size: 0.95rem;
-        font-weight: 800;
-        letter-spacing: 0.19em;
-      }
-
-      .hero-card .eyebrow {
-        color: rgba(247, 244, 238, 0.88);
-      }
-
-      .hero-title {
-        max-width: 60rem;
-        margin: 1rem 0 0;
-        font-size: clamp(3rem, 5.4vw, 4.7rem);
-        line-height: 0.98;
-        letter-spacing: -0.055em;
-        font-weight: 800;
-      }
-
-      .hero-text {
-        max-width: 52rem;
-        margin: 1.15rem 0 0;
-        color: rgba(247, 244, 238, 0.78);
-        font-size: clamp(1rem, 1.4vw, 1.45rem);
-        line-height: 1.45;
-      }
-
-      .content-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.85fr);
-        gap: 1.5rem;
-        margin-top: 3rem;
-        align-items: stretch;
-      }
-
-      .panel-card {
-        border-radius: var(--radius-xl);
-        background: rgba(255, 252, 247, 0.92);
-        box-shadow: var(--card-shadow);
-        border: 1px solid rgba(255, 255, 255, 0.55);
-      }
-
-      .form-card {
-        padding: clamp(1.55rem, 2.8vw, 1.9rem);
-      }
-
-      .request-form {
-        display: grid;
-        gap: 1.2rem;
-      }
-
-      .form-field {
-        display: grid;
-        gap: 0.55rem;
-      }
-
-      .field-compact {
-        max-width: 22rem;
-      }
-
-      .form-field-row {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-      }
-
-      .form-label {
-        color: #544f49;
-        font-size: 1.02rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
-
-      .field-control {
-        width: 100%;
-        min-height: 3.55rem;
-        padding: 0 1.15rem;
-        border-radius: 1.12rem;
-        border: 1px solid var(--border-soft);
-        background: #fffefb;
-        color: var(--text-strong);
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.72),
-          0 6px 14px rgba(190, 177, 145, 0.06);
-        transition:
-          border-color var(--ease),
-          box-shadow var(--ease);
-      }
-
-      .field-control::placeholder {
-        color: #aaa39b;
-      }
-
-      .field-control:hover {
-        border-color: rgba(28, 26, 22, 0.12);
-      }
-
-      .field-control:focus {
-        outline: none;
-        border-color: rgba(31, 179, 165, 0.5);
-        box-shadow:
-          0 0 0 5px rgba(31, 179, 165, 0.08),
-          0 10px 18px rgba(190, 177, 145, 0.08);
-      }
-
-      textarea.field-control {
-        min-height: 9.55rem;
-        padding: 1rem 1.15rem;
-        resize: vertical;
-      }
-
-      select.field-control {
-        appearance: none;
-        background-image:
-          linear-gradient(45deg, transparent 50%, #6e6b66 50%),
-          linear-gradient(135deg, #6e6b66 50%, transparent 50%);
-        background-position:
-          calc(100% - 1.2rem) calc(50% + 1px),
-          calc(100% - 0.86rem) calc(50% + 1px);
-        background-size: 0.44rem 0.44rem, 0.44rem 0.44rem;
-        background-repeat: no-repeat;
-        padding-right: 2.35rem;
-      }
-
-      .form-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.85rem;
-        margin-top: 0.2rem;
-      }
-
-      .button {
-        min-height: 3.7rem;
-        border: 0;
-        border-radius: 999px;
-        padding: 0 1.45rem;
-        font-size: 1.04rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        transition:
-          transform var(--ease),
-          box-shadow var(--ease),
-          background-color var(--ease);
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
-      }
-
-      .button-secondary {
-        color: #303030;
-        background: #fffdf9;
-        box-shadow: 0 12px 22px rgba(121, 108, 76, 0.08);
-      }
-
-      .button-primary {
-        color: #f7fffd;
-        background: linear-gradient(145deg, #23b6a7, #139c8e);
-        box-shadow: 0 16px 26px rgba(31, 179, 165, 0.28);
-      }
-
-      .assistant-card {
-        padding: clamp(1.7rem, 3vw, 2rem);
-        display: flex;
-        flex-direction: column;
-      }
-
-      .assistant-card .eyebrow {
-        color: #257d75;
-      }
-
-      .assistant-title {
-        margin: 1.55rem 0 0;
-        font-size: clamp(2.55rem, 4.6vw, 3.6rem);
-        line-height: 1.02;
-        letter-spacing: -0.055em;
-        font-weight: 800;
-      }
-
-      .assistant-list {
-        list-style: none;
-        margin: 1.75rem 0 0;
-        padding: 0;
-        display: grid;
-      }
-
-      .assistant-row {
-        display: grid;
-        grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.2fr);
-        gap: 1rem;
-        align-items: start;
-        padding: 1rem 0;
-        border-bottom: 1px solid rgba(28, 26, 22, 0.08);
-      }
-
-      .assistant-row:last-child {
-        border-bottom: 0;
-        padding-bottom: 0;
-      }
-
-      .assistant-row-label {
-        color: #4e4a45;
-        font-size: 0.98rem;
-        line-height: 1.2;
-      }
-
-      .assistant-row-value {
-        color: var(--text-strong);
-        font-weight: 700;
-        font-size: 0.98rem;
-        line-height: 1.25;
-      }
-
-      @media (max-width: 66rem) {
-        .content-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .assistant-card {
-          max-width: none;
-        }
-      }
-
-      @media (max-width: 56rem) {
         :root {
-          --nav-height: 4.7rem;
+            --bg: #f6f0e7;
+            --surface: rgba(255, 250, 246, 0.88);
+            --surface-solid: #fff9f3;
+            --surface-deep: #113a35;
+            --ink: #17181b;
+            --muted: #68665f;
+            --line: rgba(30, 36, 33, 0.06);
+            --teal: #1db1a3;
+            --teal-deep: #159489;
+            --pill: #f5f5ef;
+            --shadow: 0 24px 42px rgba(167, 143, 91, 0.14);
+            --shadow-soft: 0 18px 32px rgba(167, 143, 91, 0.1);
+            --radius-xl: 30px;
+            --radius-lg: 22px;
+            --radius-md: 18px;
+            --radius-pill: 999px;
         }
 
-        .page-shell {
-          padding-top: 1.4rem;
+        * {
+            box-sizing: border-box;
         }
 
-        .header-inner,
-        .page-shell {
-          width: min(calc(100% - 1.3rem), var(--container-width));
+        html {
+            scroll-behavior: smooth;
         }
 
-        .nav-desktop {
-          display: none;
+        body {
+            margin: 0;
+            min-width: 320px;
+            font-family: "Manrope", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 7% 12%, rgba(198, 239, 224, 0.68), transparent 26%),
+                radial-gradient(circle at 83% 15%, rgba(255, 223, 130, 0.26), transparent 14%),
+                radial-gradient(circle at 30% 82%, rgba(255, 237, 197, 0.42), transparent 24%),
+                linear-gradient(180deg, #f7f2e9 0%, #f6efe5 100%);
         }
 
-        .nav-toggle {
-          position: relative;
-          display: inline-flex;
+        body.nav-open {
+            overflow: hidden;
         }
 
-        .hero-card {
-          border-radius: 1.7rem;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.7), transparent 24%),
+                radial-gradient(circle at 76% 84%, rgba(244, 210, 122, 0.18), transparent 20%);
+            opacity: 0.9;
         }
-      }
 
-      @media (max-width: 46rem) {
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        .topbar-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(20px);
+            background: rgba(248, 241, 232, 0.82);
+            border-bottom: 1px solid rgba(29, 37, 33, 0.05);
+        }
+
+        .topbar {
+            width: min(963px, calc(100% - 36px));
+            margin: 0 auto;
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 189px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            margin: 0px 0px 0px -64px;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
         .brand-mark {
-          width: 2.75rem;
-          height: 2.75rem;
-          border-radius: 0.9rem;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #1eb9aa 0%, #13978b 100%);
+            box-shadow: 0 14px 24px rgba(22, 158, 143, 0.25);
         }
 
         .brand-name {
-          font-size: 1.25rem;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        .hero-title,
-        .assistant-title {
-          letter-spacing: -0.045em;
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex: 1;
+            min-width: 0;
         }
 
-        .content-grid {
-          margin-top: 1.4rem;
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
 
-        .form-field-row,
-        .assistant-row {
-          grid-template-columns: 1fr;
+        .nav a {
+            padding: 11px 15px;
+            border-radius: 999px;
+            color: rgba(23, 24, 27, 0.82);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        .assistant-row {
-          gap: 0.55rem;
+        .nav a:hover {
+            background: rgba(255, 252, 247, 0.92);
         }
 
-        .field-compact {
-          max-width: none;
+        .nav a.active {
+            background: rgba(216, 239, 232, 0.7);
+            box-shadow: inset 0 0 0 1px rgba(25, 133, 121, 0.05);
         }
 
-        .form-actions {
-          flex-direction: column;
+        .actions {
+            display: flex;
+            align-items: center;
+            margin: 0px 15px;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
-        .button {
-          width: 100%;
-        }
-      }
-
-      @media (max-width: 32rem) {
-        .header-inner,
-        .page-shell {
-          width: min(calc(100% - 1rem), var(--container-width));
-        }
-
-        .hero-card,
-        .form-card,
-        .assistant-card {
-          border-radius: 1.45rem;
+        .menu-toggle,
+        .mobile-close {
+            display: none;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            border: 1px solid rgba(24, 31, 28, 0.06);
+            border-radius: 16px;
+            background: rgba(255, 252, 247, 0.96);
+            box-shadow: 0 12px 22px rgba(149, 123, 68, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
 
-        .hero-card {
-          padding: 1.45rem;
+        .menu-toggle:hover,
+        .mobile-close:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 28px rgba(149, 123, 68, 0.14);
         }
 
-        .assistant-title {
-          font-size: 2.35rem;
+        .menu-toggle span,
+        .mobile-close span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin: 4px auto;
+            border-radius: 999px;
+            background: var(--ink);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .mobile-drawer .mobile-close {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .mobile-close span:first-child {
+            transform: translateY(3px) rotate(45deg);
+        }
+
+        .mobile-close span:last-child {
+            transform: translateY(-3px) rotate(-45deg);
+        }
+
+        .mobile-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(11, 18, 17, 0.32);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.24s ease, visibility 0.24s ease;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            z-index: 70;
+            width: min(372px, calc(100vw - 28px));
+            max-height: calc(100vh - 28px);
+            overflow: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            padding: 18px;
+            border: 1px solid rgba(24, 31, 28, 0.08);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255, 251, 246, 0.99) 0%, rgba(249, 243, 235, 0.97) 100%);
+            box-shadow: 0 28px 54px rgba(111, 84, 36, 0.22);
+            transform: translateX(calc(100% + 24px));
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.26s ease, opacity 0.26s ease, visibility 0.26s ease;
+        }
+
+        body.nav-open .mobile-backdrop {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        body.nav-open .mobile-drawer {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        body.nav-open .menu-toggle span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        body.nav-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.nav-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .mobile-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .mobile-drawer-kicker {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: rgba(216, 239, 232, 0.7);
+            color: #1d6c62;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
         }
 
         .mobile-nav {
-          padding: 0.25rem 0.25rem 0;
+            display: grid;
+            gap: 8px;
         }
 
-        .mobile-nav-panel {
-          width: calc(100% - 0.08rem);
-          padding-inline: 0.6rem;
+        .mobile-nav a {
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-radius: 18px;
+            background: rgba(255, 252, 247, 0.86);
+            box-shadow: inset 0 0 0 1px rgba(24, 31, 28, 0.05);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
-      }
 
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
+        .mobile-nav a:hover {
+            transform: translateX(2px);
         }
-      }
+
+        .mobile-nav a.active {
+            background: rgba(214, 238, 229, 0.78);
+        }
+
+        .mobile-actions {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(24, 31, 28, 0.06);
+        }
+
+        .mobile-actions .signal-pill,
+        .mobile-actions .button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .signal-pill,
+        .button,
+        .small-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .signal-pill {
+            min-height: 39px;
+            padding: 0 11px;
+            background: rgba(255, 252, 247, 0.94);
+            border: 1px solid rgba(24, 31, 28, 0.04);
+            box-shadow: 0 8px 18px rgba(149, 123, 68, 0.08);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .button {
+            min-height: 37px;
+            padding: 0 10px;
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .button:hover,
+        .signal-pill:hover,
+        .small-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            color: #ffffff;
+            background: linear-gradient(180deg, #22beb0 0%, #18a295 100%);
+            box-shadow: 0 18px 28px rgba(29, 177, 163, 0.26);
+            margin-right: -5pc;
+        }
+
+        /* --- PAGE SPECIFIC STYLES --- */
+        .shell {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: linear-gradient(180deg, #2a2e31 0%, #23262a 100%);
+            color: #ffffff;
+            border-radius: 28px;
+            padding: 60px 48px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(29, 177, 163, 0.08), transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 16px;
+            color: #a8adb3;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin: 0 0 16px 0;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+            opacity: 0.8;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 48px;
+            margin-top: 48px;
+            margin-bottom: 60px;
+        }
+
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 24px 0;
+            color: var(--ink);
+        }
+
+        .form-field {
+            margin-bottom: 24px;
+        }
+
+        .form-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--ink);
+        }
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: var(--pill);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: var(--muted);
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus,
+        .form-field select:focus {
+            border-color: var(--teal);
+            background: var(--surface-solid);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 140px;
+            line-height: 1.5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row .form-field {
+            margin-bottom: 0;
+        }
+
+        .button-submit {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 24px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #22beb0 0%, #18a295 100%);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            box-shadow: 0 18px 28px rgba(29, 177, 163, 0.26);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 36px rgba(29, 177, 163, 0.32);
+        }
+
+        .button-submit:active {
+            transform: translateY(0);
+        }
+
+        .guidance-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: var(--shadow-soft);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .guidance-card h3 {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 0 0 24px 0;
+        }
+
+        .guidance-item {
+            margin-bottom: 28px;
+        }
+
+        .guidance-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .guidance-item strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+
+        .guidance-item p {
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1080px) {
+            .topbar {
+                gap: 16px;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                flex-shrink: 0;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .guidance-card {
+                position: static;
+                top: auto;
+            }
+
+            .hero {
+                padding: 48px 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 24px;
+                margin-top: 32px;
+                border-radius: 22px;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.5rem, 4vw, 2.2rem);
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .content {
+                gap: 32px;
+                margin-top: 32px;
+                margin-bottom: 40px;
+            }
+
+            .form-card,
+            .guidance-card {
+                padding: 24px;
+            }
+
+            .form-card h2 {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-drawer {
+                top: 10px;
+                right: 10px;
+                width: calc(100vw - 20px);
+                max-height: calc(100vh - 20px);
+                padding: 16px;
+                border-radius: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shell {
+                padding: 0 16px;
+            }
+
+            .hero {
+                padding: 32px 20px;
+                margin-top: 24px;
+                border-radius: 18px;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+                margin-bottom: 12px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .content {
+                gap: 24px;
+                margin-top: 24px;
+            }
+
+            .form-card,
+            .guidance-card {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            .form-card h2,
+            .guidance-card h3 {
+                font-size: 16px;
+                margin-bottom: 18px;
+            }
+
+            .form-field {
+                margin-bottom: 18px;
+            }
+
+            .form-field label {
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+
+            .form-field input,
+            .form-field textarea,
+            .form-field select {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            .form-field textarea {
+                min-height: 120px;
+            }
+
+            .button-submit {
+                min-height: 44px;
+                font-size: 15px;
+            }
+
+            .guidance-item {
+                margin-bottom: 20px;
+            }
+
+            .guidance-item strong {
+                font-size: 14px;
+            }
+
+            .guidance-item p {
+                font-size: 13px;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <a class="brand" href="#top" aria-label="HelpHub AI home">
-          <span class="brand-mark" aria-hidden="true">H</span>
-          <span class="brand-name">HelpHub AI</span>
-        </a>
+</head>
 
-        <nav class="nav-desktop" aria-label="Primary">
-          <a class="nav-link" href="/index.html">Dashboard</a>
-          <a class="nav-link" href="#assistant-guidance">Explore</a>
-          <a class="nav-link active" href="#request-form" aria-current="page">Create Request</a>
-        </nav>
+<body>
+    <div class="topbar-wrap">
+        <header class="topbar">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark">H</span>
+                <span class="brand-name">HelpHub AI</span>
+            </a>
 
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="mobile-navigation"
-          aria-label="Open navigation menu"
-        >
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-      </div>
-    </header>
+            <div class="desktop-nav">
+                <nav class="nav" aria-label="Primary">
+                    <a href="../index.html">Home</a>
+                    <a href="../explore/explore.html">Explore</a>
+                    <a href="../AIcenter/aicenter.html">AICenter</a>
+                    <a href="./request.html" class="active">Request</a>
+                    <a href="../proflie/profile.html">Profile</a>
+                    <a href="../login/login.html">Login</a>
+                </nav>
 
-    <div class="mobile-nav" id="mobile-navigation" aria-hidden="true">
-      <button class="mobile-nav-backdrop" type="button" aria-label="Close navigation menu"></button>
-      <div class="mobile-nav-panel" role="dialog" aria-modal="true" aria-labelledby="mobile-navigation-title">
-        <div class="mobile-nav-header">
-          <span class="mobile-nav-tag" id="mobile-navigation-title">NAVIGATION</span>
-          <button class="mobile-nav-close" type="button" aria-label="Close menu">
-            <span class="mobile-nav-close-line" aria-hidden="true"></span>
-            <span class="mobile-nav-close-line" aria-hidden="true"></span>
-          </button>
-        </div>
+                <div class="actions">
+                    <a class="signal-pill" href="#">Live community signals</a>
+                    <a class="button button-primary" href="#">Join the platform</a>
+                </div>
+            </div>
 
-        <nav class="mobile-nav-links" aria-label="Mobile primary">
-          <a class="nav-link" href="/index.html">Dashboard</a>
-          <a class="nav-link" href="#assistant-guidance">Explore</a>
-          <a class="nav-link active" href="#request-form" aria-current="page">Create Request</a>
-        </nav>
-
-        <div class="mobile-nav-actions">
-          <a class="mobile-nav-secondary" href="#assistant-guidance">Explore the workspace</a>
-          <a class="mobile-nav-primary" href="#request-form">Create Request</a>
-        </div>
-      </div>
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="mobile-drawer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
     </div>
 
-    <main class="page-shell" id="top">
-      <section class="hero-card" aria-labelledby="page-title">
-        <span class="eyebrow">CREATE REQUEST</span>
-        <h1 class="hero-title" id="page-title">Turn a rough problem into a clear help request.</h1>
-        <p class="hero-text">
-          Use built-in AI suggestions for category, urgency, tags, and a stronger description rewrite.
-        </p>
-      </section>
+    <div class="mobile-backdrop"></div>
 
-      <section class="content-grid">
-        <article class="panel-card form-card" id="request-form">
-          <form class="request-form">
-            <div class="form-field">
-              <label class="form-label" for="request-title">Title</label>
-              <input
-                class="field-control"
-                id="request-title"
-                name="title"
-                type="text"
-                value="Need review on my JavaScript quiz app before submission"
-              />
-            </div>
+    <aside class="mobile-drawer" id="mobile-drawer" aria-hidden="true" aria-label="Mobile navigation">
+        <div class="mobile-drawer-header">
+            <span class="mobile-drawer-kicker">Navigation</span>
+            <button class="mobile-close" type="button" aria-label="Close navigation menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
 
-            <div class="form-field">
-              <label class="form-label" for="request-description">Description</label>
-              <textarea class="field-control" id="request-description" name="description">Explain the challenge, your current progress, deadline, and what kind of help would be useful.</textarea>
-            </div>
+        <nav class="mobile-nav" aria-label="Mobile Primary">
+            <a href="../index.html">Home</a>
+            <a href="../explore/explore.html">Explore</a>
+            <a href="../leaderboad/leaderboard.html">Leaderboard</a>
+            <a href="../AIcenter/aicenter.html">AICenter</a>
+            <a href="../notification/notification.html">Notifications</a>
+            <a href="./request.html" class="active">Request</a>
+            <a href="../proflie/profile.html">Profile</a>
+        </nav>
 
-            <div class="form-field-row">
-              <div class="form-field">
-                <label class="form-label" for="request-tags">Tags</label>
-                <input
-                  class="field-control"
-                  id="request-tags"
-                  name="tags"
-                  type="text"
-                  value="JavaScript, Debugging, Review"
-                />
-              </div>
+        <div class="mobile-actions">
+            <a class="signal-pill" href="#">Live community signals</a>
+            <a class="button button-primary" href="#">Join the platform</a>
+        </div>
+    </aside>
 
-              <div class="form-field">
-                <label class="form-label" for="request-category">Category</label>
-                <select class="field-control" id="request-category" name="category">
-                  <option selected>Web Development</option>
-                  <option>Frontend</option>
-                  <option>Backend</option>
-                  <option>UI Design</option>
-                </select>
-              </div>
-            </div>
+    <div class="shell">
+        <section class="hero">
+            <span class="eyebrow">CREATE REQUEST</span>
+            <h1>Turn a rough problem into a clear help request.</h1>
+            <p>Let AI suggestions guide you to phrase your request in a way that gets results.</p>
+        </section>
 
-            <div class="form-field field-compact">
-              <label class="form-label" for="request-urgency">Urgency</label>
-              <select class="field-control" id="request-urgency" name="urgency">
-                <option>Low</option>
-                <option selected>High</option>
-                <option>Medium</option>
-              </select>
-            </div>
+        <div class="content">
+            <form class="form-card">
+                <h2>Your Request</h2>
 
-            <div class="form-actions">
-              <button class="button button-secondary" type="button">Apply AI suggestions</button>
-              <button class="button button-primary" type="submit">Publish request</button>
-            </div>
-          </form>
-        </article>
+                <div class="form-field">
+                    <label for="title">Request Title</label>
+                    <input id="title" type="text" placeholder="Brief title for your request">
+                </div>
 
-        <aside class="panel-card assistant-card" id="assistant-guidance">
-          <span class="eyebrow">AI ASSISTANT</span>
-          <h2 class="assistant-title">Smart request guidance</h2>
+                <div class="form-field">
+                    <label for="description">Detailed Description</label>
+                    <textarea id="description" placeholder="Provide context and details about what you need help with..."></textarea>
+                </div>
 
-          <ul class="assistant-list">
-            <li class="assistant-row">
-              <span class="assistant-row-label">Suggested category</span>
-              <span class="assistant-row-value">Community</span>
-            </li>
-            <li class="assistant-row">
-              <span class="assistant-row-label">Detected urgency</span>
-              <span class="assistant-row-value">Low</span>
-            </li>
-            <li class="assistant-row">
-              <span class="assistant-row-label">Suggested tags</span>
-              <span class="assistant-row-value">Add more detail for smarter tags</span>
-            </li>
-            <li class="assistant-row">
-              <span class="assistant-row-label">Rewrite suggestion</span>
-              <span class="assistant-row-value">
-                Start describing the challenge to generate a stronger version.
-              </span>
-            </li>
-          </ul>
-        </aside>
-      </section>
-    </main>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="category">Category</label>
+                        <select id="category">
+                            <option>Select a category</option>
+                            <option>Web Development</option>
+                            <option>Mobile Development</option>
+                            <option>Design</option>
+                            <option>Career</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="urgency">Urgency Level</label>
+                        <select id="urgency">
+                            <option>Select urgency</option>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="skills">Required Skills</label>
+                    <input id="skills" type="text" placeholder="e.g., React, Figma, Node.js">
+                </div>
+
+                <div class="form-field">
+                    <label for="location">Location / Preference</label>
+                    <input id="location" type="text" placeholder="e.g., Remote, Karachi, Lahore">
+                </div>
+
+                <button type="submit" class="button-submit">Submit Request</button>
+            </form>
+
+            <aside class="guidance-card">
+                <h3>Assistant Guidance</h3>
+
+                <div class="guidance-item">
+                    <strong>Be Specific</strong>
+                    <p>Include clear details about your problem and what you've already tried. This helps helpers understand exactly what you need.</p>
+                </div>
+
+                <div class="guidance-item">
+                    <strong>Set Clear Goals</strong>
+                    <p>Define what success looks like. Are you learning, building, or debugging? Do you need a quick fix or long-term mentoring?</p>
+                </div>
+
+                <div class="guidance-item">
+                    <strong>Add Context</strong>
+                    <p>Share relevant background: your experience level, project scope, deadline, and any constraints. This helps match you with the right helper.</p>
+                </div>
+
+                <div class="guidance-item">
+                    <strong>Be Realistic</strong>
+                    <p>Ask for help that one person can reasonably provide in a session or two. Massive projects work better with ongoing partnerships.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
 
     <script>
-      const navToggle = document.querySelector(".nav-toggle");
-      const mobileNav = document.querySelector(".mobile-nav");
-      const mobileNavClose = document.querySelector(".mobile-nav-close");
-      const mobileNavBackdrop = document.querySelector(".mobile-nav-backdrop");
-      const mobileNavAnchors = document.querySelectorAll(".mobile-nav a[href]");
-      const requestForm = document.querySelector(".request-form");
-      const desktopBreakpoint = window.matchMedia("(min-width: 56rem)");
-      let focusReturnTarget = null;
+        const body = document.body;
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mobileClose = document.querySelector(".mobile-close");
+        const mobileBackdrop = document.querySelector(".mobile-backdrop");
+        const mobileDrawer = document.querySelector(".mobile-drawer");
+        const mobileLinks = document.querySelectorAll(".mobile-nav a");
+        const mobileBreakpoint = 1080;
 
-      const getMobileNavFocusable = () =>
-        Array.from(mobileNav.querySelectorAll('a[href], button:not([disabled])'));
+        const syncMenuState = (isOpen) => {
+            if (!menuToggle || !mobileDrawer) {
+                return;
+            }
 
-      const setMenuState = (isOpen, { restoreFocus = false } = {}) => {
-        if (isOpen) {
-          focusReturnTarget = document.activeElement;
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            mobileDrawer.setAttribute("aria-hidden", String(!isOpen));
+            body.classList.toggle("nav-open", isOpen);
+        };
+
+        const closeMenu = () => {
+            syncMenuState(false);
+        };
+
+        const openMenu = () => {
+            if (window.innerWidth > mobileBreakpoint) {
+                return;
+            }
+
+            syncMenuState(true);
+        };
+
+        if (menuToggle && mobileDrawer) {
+            syncMenuState(false);
+
+            menuToggle.addEventListener("click", () => {
+                if (body.classList.contains("nav-open")) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
         }
 
-        mobileNav.classList.toggle("is-open", isOpen);
-        mobileNav.setAttribute("aria-hidden", String(!isOpen));
-        mobileNav.inert = !isOpen;
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-        navToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Close navigation menu" : "Open navigation menu"
-        );
-        document.body.classList.toggle("menu-open", isOpen);
-
-        if (isOpen) {
-          requestAnimationFrame(() => mobileNavClose.focus());
-        } else if (restoreFocus && focusReturnTarget instanceof HTMLElement) {
-          focusReturnTarget.focus();
-        }
-      };
-
-      setMenuState(false);
-
-      navToggle.addEventListener("click", () => {
-        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
-        setMenuState(!isOpen);
-      });
-
-      mobileNavClose.addEventListener("click", () => setMenuState(false, { restoreFocus: true }));
-      mobileNavBackdrop.addEventListener("click", () =>
-        setMenuState(false, { restoreFocus: true })
-      );
-
-      mobileNavAnchors.forEach((link) => {
-        link.addEventListener("click", () => setMenuState(false));
-      });
-
-      requestForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-      });
-
-      document.addEventListener("keydown", (event) => {
-        const isMenuOpen = navToggle.getAttribute("aria-expanded") === "true";
-
-        if (!isMenuOpen) {
-          return;
+        if (mobileClose) {
+            mobileClose.addEventListener("click", closeMenu);
         }
 
-        if (event.key === "Escape") {
-          event.preventDefault();
-          setMenuState(false, { restoreFocus: true });
-          return;
+        if (mobileBackdrop) {
+            mobileBackdrop.addEventListener("click", closeMenu);
         }
 
-        if (event.key === "Tab") {
-          const focusableItems = getMobileNavFocusable();
-          const firstItem = focusableItems[0];
-          const lastItem = focusableItems[focusableItems.length - 1];
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
 
-          if (!firstItem || !lastItem) {
-            return;
-          }
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
 
-          if (event.shiftKey && document.activeElement === firstItem) {
-            event.preventDefault();
-            lastItem.focus();
-          } else if (!event.shiftKey && document.activeElement === lastItem) {
-            event.preventDefault();
-            firstItem.focus();
-          }
-        }
-      });
-
-      const handleDesktopChange = (event) => {
-        if (event.matches) {
-          setMenuState(false);
-        }
-      };
-
-      if (typeof desktopBreakpoint.addEventListener === "function") {
-        desktopBreakpoint.addEventListener("change", handleDesktopChange);
-      } else {
-        desktopBreakpoint.addListener(handleDesktopChange);
-      }
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > mobileBreakpoint) {
+                closeMenu();
+            }
+        });
     </script>
-  </body>
+</body>
+
 </html>
