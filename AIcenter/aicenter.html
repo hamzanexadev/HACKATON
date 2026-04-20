@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelpHub AI - AI Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" href="./image.png" type="image/x-icon">
     <style>
+        :root {
+            --teal: #0d9488;
+            --ink: #111827;
+            --muted: #6b7280;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
         body {
@@ -20,18 +28,20 @@
             background:
                 radial-gradient(circle at top left, rgba(195, 239, 220, 0.75), transparent 29%),
                 radial-gradient(circle at top right, rgba(255, 226, 182, 0.5), transparent 32%),
-                linear-gradient(180deg, #faf6ee 0%, #f6f1e6 48%, #f8f3ea 100%);
+                linear-gradient(180deg, #faf6ee 0%, #f6f1e6 100%);
+            min-height: 100vh;
         }
 
-        /* Navbar */
+        /* --- Navbar --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 12%;
-            max-width: 100%;
-            background-color: #f8f1e8d6;
+            padding: 20px 5%;
+            max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1000;
         }
 
         .logo {
@@ -40,19 +50,17 @@
             gap: 10px;
             font-weight: 700;
             font-size: 1.1rem;
-            color: #111827;
         }
 
         .logo-icon {
             width: 32px;
             height: 32px;
-            background-color: #0d9488;
+            background-color: var(--teal);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 8px;
-            font-size: 0.9rem;
         }
 
         .nav-links {
@@ -63,23 +71,22 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #6b7280;
+            color: var(--muted);
             font-size: 0.9rem;
             font-weight: 500;
+            transition: 0.3s;
         }
 
         .nav-links a.active {
-            background-color: #d8efe8b3;
+            background-color: #d8efe8;
             padding: 8px 16px;
             border-radius: 20px;
             color: #065f46;
         }
 
-        /* Mobile Hamburger Logic */
-        .menu-toggle {
-            display: none;
-        }
-
+        /* Hamburger Styles */
+        .menu-toggle { display: none; }
+        
         .hamburger {
             display: none;
             cursor: pointer;
@@ -92,21 +99,18 @@
             height: 3px;
             background-color: #374151;
             border-radius: 2px;
+            transition: 0.3s ease;
         }
 
-        /* hero */
+        /* --- Hero Section --- */
         .hero {
             background: linear-gradient(180deg, #1e2629 0%, #20292c 100%);
             color: #fff;
             border-radius: 26px;
-            box-shadow: var(--shadow);
-            padding: 26px 26px 28px;
-            min-height: 236px;
-            margin: 20px 0px 0px 175px;
-            max-width: 73pc;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1100px;
+            width: calc(100% - 40px);
         }
 
         .eyebrow {
@@ -116,190 +120,113 @@
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.68);
             margin-bottom: 14px;
+            display: block;
         }
 
         .hero h1 {
-            margin: 0;
-            max-width: 800px;
-            font-size: 50px;
-            font-weight: 600;
-            line-height: 0.95;
-            letter-spacing: -0.05em;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            line-height: 1.1;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            margin: 18px 0 0;
-            max-width: 520px;
+            max-width: 600px;
             color: rgba(255, 255, 255, 0.62);
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 1rem;
         }
 
-        /* Stats Section */
+        /* --- Stats Grid --- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 913px;
-            margin: 20px 110px 21px 8.5pc;
-            padding: 0 40px;
+            gap: 20px;
+            max-width: 1100px;
+            margin: 30px auto;
+            width: calc(100% - 40px);
         }
 
         .stat-card {
             background-color: #fffaf5;
-            padding: 19px;
-            width: 267px;
+            padding: 25px;
             border-radius: 24px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
         }
 
-        .stat-card h5 {
-            color: #0d9488;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .stat-card h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .stat-card p {
-            font-size: 0.9rem;
-            color: #6b7280;
-            line-height: 1.5;
-        }
-
-        /* Recommendations Section */
+        /* --- Recommendations --- */
         .recommendations {
-            max-width: 73pc;
-            margin: 0px 0px 0px 175px;
+            max-width: 1100px;
+            margin: 30px auto 50px;
             background-color: #fffaf5;
             border-radius: 32px;
-            padding: 50px;
-        }
-
-        .rec-label {
-            color: #0d9488;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .recommendations h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #111827;
-        }
-
-        .rec-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            padding: 40px;
+            width: calc(100% - 40px);
+            box-shadow: var(--shadow);
         }
 
         .rec-item {
             background-color: #fdf6ec;
-            padding: 25px 30px;
+            padding: 25px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .rec-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: #111827;
-        }
-
-        .rec-item p {
-            color: #6b7280;
-            font-size: 0.95rem;
             margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .tag-group {
-            display: flex;
-            gap: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         .tag {
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .tag-web {
             background: #eef3ea;
             color: #166534;
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 5px;
         }
 
+        /* --- RESPONSIVE DESIGN (TOP DROPDOWN) --- */
 
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
 
-
-
-
-
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            header h1 {
-                font-size: 2.8rem;
+            .nav-links {
+                position: absolute;
+                top: 80px; /* Navbar ke bilkul niche */
+                left: 20px;
+                right: 20px;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                border-radius: 20px;
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+                
+                /* Hide Logic */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: 0.3s ease;
+                z-index: 999;
             }
+
+            /* Jab checkbox check ho (Menu Open) */
+            #menu-toggle:checked ~ .nav-links {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            /* Hamburger to X Animation */
+            #menu-toggle:checked ~ .hamburger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            #menu-toggle:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
+            #menu-toggle:checked ~ .hamburger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-                margin-top: 20px;
-                padding: 0 20px;
             }
 
-            header {
-                margin: 10px;
-                padding: 40px 30px;
-            }
-
-            .recommendations {
-                margin: 10px;
-                padding: 30px;
-            }
+            .hero h1 { font-size: 2.2rem; }
         }
 
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: white;
-                padding: 20px;
-                flex-direction: column;
-                z-index: 100;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-            }
-
-            .menu-toggle:checked~.nav-links {
-                display: flex;
-            }
-
-            header h1 {
-                font-size: 2.2rem;
-            }
-
-            .stat-card {
-                padding: 25px;
-            }
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -322,12 +249,12 @@
         <div class="nav-links">
             <a href="/index.html">Dashboard</a>
             <a href="/request/request.html">Create Request</a>
-            <a href="/AIcenter/aicenter.html" class="active">AI Center</a>
+            <a href="#" class="active">AI Center</a>
         </div>
     </nav>
 
     <header class="hero">
-        <h4 class="eyebrow">AI Center</h4>
+        <span class="eyebrow">AI Center</span>
         <h1>See what the platform intelligence is noticing.</h1>
         <p>AI-like insights summarize demand trends, helper readiness, urgency signals, and request recommendations.</p>
     </header>
@@ -335,64 +262,38 @@
     <div class="stats-grid">
         <div class="stat-card">
             <h5>Trend Pulse</h5>
-            <h2>Web Development</h2>
-            <p>Most common support area based on active community requests.</p>
+            <h2 style="margin: 10px 0;">Web Development</h2>
+            <p style="font-size: 0.9rem; color: var(--muted);">Most common support area based on active community requests.</p>
         </div>
         <div class="stat-card">
             <h5>Urgency Watch</h5>
-            <h2>2</h2>
-            <p>Requests currently flagged high priority by the urgency detector.</p>
+            <h2 style="margin: 10px 0;">2</h2>
+            <p style="font-size: 0.9rem; color: var(--muted);">Requests currently flagged high priority by the urgency detector.</p>
         </div>
         <div class="stat-card">
             <h5>Mentor Pool</h5>
-            <h2>2</h2>
-            <p>Trusted helpers with strong response history and contribution signals.</p>
+            <h2 style="margin: 10px 0;">2</h2>
+            <p style="font-size: 0.9rem; color: var(--muted);">Trusted helpers with strong response history.</p>
         </div>
     </div>
 
     <section class="recommendations">
-        <span class="rec-label">AI Recommendations</span>
-        <h2>Requests needing attention</h2>
+        <span class="rec-label" style="color: var(--teal); font-weight: bold; font-size: 0.7rem; text-transform: uppercase;">AI Recommendations</span>
+        <h2 style="margin: 15px 0 25px;">Requests needing attention</h2>
 
         <div class="rec-list">
             <div class="rec-item">
-                <h3>Need help</h3>
-                <p>AI summary: Web Development request with high urgency. Best suited for members with relevant
-                    expertise.</p>
-                <div class="tag-group">
-                    <span class="tag tag-web">Web Development</span>
-                    <span class="tag tag-web">High</span>
-                </div>
+                <h3>Portfolio Responsive Help</h3>
+                <p style="margin-top: 10px; color: var(--muted);">AI summary: Web Development request with high urgency. Best suited for mentors with layout expertise.</p>
+                <span class="tag">Web Development</span>
+                <span class="tag">High</span>
             </div>
 
             <div class="rec-item">
-                <h3>Need help making my portfolio responsive before demo day</h3>
-                <p>Responsive layout issue with a short deadline. Best helpers are frontend mentors comfortable with CSS
-                    grids and media queries.</p>
-                <div class="tag-group">
-                    <span class="tag tag-web">Web Development</span>
-                    <span class="tag tag-web">High</span>
-                </div>
-            </div>
-
-            <div class="rec-item">
-                <h3>Looking for Figma feedback on a volunteer event poster</h3>
-                <p>A visual design critique request where feedback on hierarchy, spacing, and messaging would create the
-                    most value.</p>
-                <div class="tag-group">
-                    <span class="tag tag-web">Design</span>
-                    <span class="tag tag-web">Medium</span>
-                </div>
-            </div>
-
-            <div class="rec-item">
-                <h3>Need mock interview support for internship applications</h3>
-                <p>Career coaching request focused on confidence-building, behavioral answers, and entry-level frontend
-                    interviews.</p>
-                <div class="tag-group">
-                    <span class="tag tag-web">Career</span>
-                    <span class="tag tag-web">Low</span>
-                </div>
+                <h3>Mock Interview Support</h3>
+                <p style="margin-top: 10px; color: var(--muted);">Career coaching request focused on confidence-building and technical interview prep.</p>
+                <span class="tag">Career</span>
+                <span class="tag">Low</span>
             </div>
         </div>
     </section>
