@@ -9,22 +9,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
         :root {
-            --bg: #f6f0e7;
-            --surface: rgba(255, 250, 246, 0.88);
-            --surface-solid: #fff9f3;
-            --surface-deep: #113a35;
-            --ink: #17181b;
-            --muted: #68665f;
-            --line: rgba(30, 36, 33, 0.06);
-            --teal: #1db1a3;
-            --teal-deep: #159489;
-            --pill: #f5f5ef;
-            --shadow: 0 24px 42px rgba(167, 143, 91, 0.14);
-            --shadow-soft: 0 18px 32px rgba(167, 143, 91, 0.1);
-            --radius-xl: 30px;
-            --radius-lg: 22px;
-            --radius-md: 18px;
-            --radius-pill: 999px;
+          --bg: #f6f0e7;
+          --surface: rgba(255, 250, 246, 0.88);
+          --surface-solid: #fff9f3;
+          --surface-deep: #113a35;
+          --ink: #17181b;
+          --muted: #68665f;
+          --line: rgba(30, 36, 33, 0.06);
+          --teal: #1db1a3; /* base teal */
+          --teal-bright: #12c7ab;
+          --teal-deep: #138776;
+          --teal-copy: #0f5a50;
+          --pill: #f5f5ef;
+          --panel: linear-gradient(180deg, #fffdfa, #fff8f1);
+          --hero: linear-gradient(180deg, #152422 0%, #1b2726 100%);
+          --shadow: 0 24px 42px rgba(167, 143, 91, 0.14);
+          --shadow-soft: 0 18px 32px rgba(167, 143, 91, 0.1);
+          --shadow-card: 0 20px 40px rgba(70, 55, 34, 0.08);
+          --shadow-hero: 0 28px 54px rgba(11, 18, 17, 0.45);
+          --radius-xl: 30px;
+          --radius-lg: 22px;
+          --radius-md: 18px;
+          --radius-pill: 999px;
         }
 
         * {
@@ -90,19 +96,20 @@
         }
 
         .topbar {
-            width: min(963px, calc(100% - 36px));
+          width: min(1100px, calc(100% - 36px));
             margin: 0 auto;
             min-height: 78px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 189px;
+          justify-content: space-between;
+          gap: 24px;
+          padding: 10px 0;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            margin: 0px 0px 0px -64px;
+          margin: 0px;
             gap: 12px;
             flex-shrink: 0;
         }
@@ -116,8 +123,8 @@
             font-weight: 700;
             color: #ffffff;
             border-radius: 12px;
-            background: linear-gradient(180deg, #1eb9aa 0%, #13978b 100%);
-            box-shadow: 0 14px 24px rgba(22, 158, 143, 0.25);
+          background: linear-gradient(180deg, #1eb9aa 0%, #13a88f 100%);
+          box-shadow: 0 10px 20px rgba(22, 158, 143, 0.18);
         }
 
         .brand-name {
@@ -129,7 +136,7 @@
         .desktop-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 18px;
             flex: 1;
             min-width: 0;
@@ -158,8 +165,12 @@
         }
 
         .nav a.active {
-            background: rgba(216, 239, 232, 0.7);
-            box-shadow: inset 0 0 0 1px rgba(25, 133, 121, 0.05);
+          background: linear-gradient(180deg, rgba(29, 177, 163, 0.12), rgba(29, 177, 163, 0.06));
+          color: var(--teal-copy);
+          padding: 10px 16px;
+          border-radius: 999px;
+          box-shadow: 0 8px 22px rgba(17, 84, 74, 0.06);
+          font-weight: 700;
         }
 
         .actions {
@@ -439,14 +450,24 @@
   }
 
   .hero {
-    padding: 30px 22px 28px;
+    padding: 44px 34px;
     border-radius: var(--radius-xl);
     color: #fff;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
-      linear-gradient(180deg, var(--hero) 0%, #21292a 100%);
+    background: var(--hero);
     box-shadow: var(--shadow-hero);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 8px, rgba(255,255,255,0) 8px 16px);
+    opacity: 0.06;
+    pointer-events: none;
+    border-radius: inherit;
   }
 
   .eyebrow {
@@ -463,10 +484,10 @@
   }
 
   .hero-title {
-    max-width: 760px;
-    font-size: clamp(2.55rem, 3.4vw, 3.62rem);
+    max-width: 880px;
+    font-size: clamp(2.8rem, 4.6vw, 4.2rem);
     line-height: 0.98;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.04em;
     font-weight: 800;
     margin-bottom: 14px;
   }
@@ -495,7 +516,7 @@
     border-radius: 26px;
     padding: 28px 22px 22px;
     box-shadow: var(--shadow-card);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(16, 18, 14, 0.03);
     backdrop-filter: blur(6px);
   }
 
@@ -519,7 +540,7 @@
 
   .conversation-list {
     display: grid;
-    gap: 14px;
+    gap: 18px;
   }
 
   .conversation-item {
@@ -527,11 +548,11 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 14px;
-    padding: 14px 14px 13px;
-    border-radius: 21px;
-    background: rgba(255, 255, 255, 0.62);
-    border: 1px solid rgba(235, 227, 214, 0.88);
-    box-shadow: 0 18px 26px -26px rgba(77, 72, 60, 0.45);
+    padding: 16px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid rgba(235, 227, 214, 0.95);
+    box-shadow: 0 10px 20px rgba(74, 61, 41, 0.06);
   }
 
   .conversation-content {
@@ -539,7 +560,7 @@
   }
 
   .conversation-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 800;
     letter-spacing: -0.02em;
     margin-bottom: 8px;
@@ -548,24 +569,25 @@
   .conversation-preview {
     max-width: 325px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 1.65;
+    line-height: 1.7;
   }
 
   .time-pill {
-    width: 58px;
-    height: 58px;
-    flex: 0 0 58px;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
     border-radius: 50%;
     display: grid;
     place-items: center;
     text-align: center;
-    background: linear-gradient(180deg, #edf9f6 0%, #e5f3ee 100%);
-    color: #4e857a;
+    background: linear-gradient(180deg, #f2fbf9 0%, #ecf7f4 100%);
+    color: var(--teal-deep);
     font-size: 12px;
     line-height: 1.15;
     font-weight: 800;
+    border: 1px solid rgba(21, 150, 137, 0.12);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
@@ -624,7 +646,7 @@
   }
 
   .send-button {
-    margin-top: 2px;
+    margin-top: 6px;
     border: 0;
     border-radius: var(--radius-pill);
     padding: 14px 18px;
@@ -634,7 +656,7 @@
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 14px 26px -16px rgba(21, 150, 137, 0.8);
+    box-shadow: 0 12px 26px -8px rgba(18, 120, 108, 0.28);
     transition: transform 0.12s ease, box-shadow 0.2s ease;
   }
 
@@ -722,17 +744,12 @@
 
             <div class="desktop-nav">
                 <nav class="nav" aria-label="Primary">
-                    <a href="../index.html">Home</a>
+                    <a href="../index.html">Dashboard</a>
                     <a href="../explore/explore.html">Explore</a>
-                    <a href="../AIcenter/aicenter.html">AICenter</a>
-                    <a href="../request/request.html">Request</a>
-                    <a href="../proflie/profile.html">Profile</a>
-                    <a href="../login/login.html">Login</a>
+                    <a href="../messages/message.html" class="active">Messages</a>
                 </nav>
 
                 <div class="actions">
-                    <a class="signal-pill" href="#">Live community signals</a>
-                    <a class="button button-primary" href="#">Join the platform</a>
                 </div>
             </div>
 
@@ -757,18 +774,12 @@
         </div>
 
         <nav class="mobile-nav" aria-label="Mobile Primary">
-            <a href="../index.html">Home</a>
+            <a href="../index.html">Dashboard</a>
             <a href="../explore/explore.html">Explore</a>
-            <a href="../leaderboad/leaderboard.html">Leaderboard</a>
-            <a href="../AIcenter/aicenter.html">AICenter</a>
-            <a href="../notification/notification.html">Notifications</a>
-            <a href="../request/request.html">Request</a>
-            <a href="../proflie/profile.html">Profile</a>
+            <a href="../messages/message.html" class="active">Messages</a>
         </nav>
 
         <div class="mobile-actions">
-            <a class="signal-pill" href="#">Live community signals</a>
-            <a class="button button-primary" href="#">Join the platform</a>
         </div>
     </aside>
 
