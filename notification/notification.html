@@ -7,7 +7,8 @@
     <title>HelpHub AI - Notifications</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #f6f0e7;
@@ -123,7 +124,7 @@
         .desktop-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 18px;
             flex: 1;
             min-width: 0;
@@ -399,7 +400,7 @@
             pointer-events: none;
         }
 
-        .hero > * {
+        .hero>* {
             position: relative;
             z-index: 1;
         }
@@ -514,6 +515,10 @@
             .hero {
                 padding: 48px 32px;
             }
+
+            .brand {
+                margin: 0px 0px 0px 0px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -540,6 +545,10 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
+            }
+
+            .brand {
+                margin: 0px 0px 0px 0px;
             }
 
             .notification-status {
@@ -582,6 +591,10 @@
                 font-size: 12px;
             }
 
+            .brand {
+                margin: 0px 0px 0px 0px;
+            }
+
             .notification-status {
                 font-size: 12px;
             }
@@ -599,17 +612,16 @@
 
             <div class="desktop-nav">
                 <nav class="nav" aria-label="Primary">
-                    <a href="../index.html">Home</a>
+                    <a href="../index.html">Dashboard</a>
                     <a href="../explore/explore.html">Explore</a>
-                    <a href="../leaderboad/leaderboard.html">Leaderboard</a>
                     <a href="./notification.html" class="active">Notifications</a>
-                    <a href="../proflie/profile.html">Profile</a>
+
                 </nav>
 
-                <div class="actions">
+                <!-- <div class="actions">
                     <a class="signal-pill" href="#">Live signals</a>
                     <a class="button button-primary" href="#">Join</a>
-                </div>
+                </div> -->
             </div>
 
             <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
@@ -635,15 +647,13 @@
         <nav class="mobile-nav" aria-label="Mobile Primary">
             <a href="../index.html">Home</a>
             <a href="../explore/explore.html">Explore</a>
-            <a href="../leaderboad/leaderboard.html">Leaderboard</a>
             <a href="./notification.html" class="active">Notifications</a>
-            <a href="../proflie/profile.html">Profile</a>
         </nav>
 
-        <div class="mobile-actions">
+        <!-- <div class="mobile-actions">
             <a class="signal-pill" href="#">Live signals</a>
             <a class="button button-primary" href="#">Join</a>
-        </div>
+        </div> -->
     </aside>
 
     <div class="shell">
@@ -684,7 +694,8 @@
 
             <div class="notification-item">
                 <div class="notification-content">
-                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</p>
+                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked
+                        as solved</p>
                     <p class="notification-meta">Status • just now</p>
                 </div>
                 <div class="notification-status">Unread</div>
@@ -692,7 +703,8 @@
 
             <div class="notification-item">
                 <div class="notification-content">
-                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</p>
+                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked
+                        as solved</p>
                     <p class="notification-meta">Status • just now</p>
                 </div>
                 <div class="notification-status">Unread</div>
@@ -700,7 +712,8 @@
 
             <div class="notification-item">
                 <div class="notification-content">
-                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked as solved</p>
+                    <p class="notification-title">"Need help making my portfolio responsive before demo day" was marked
+                        as solved</p>
                     <p class="notification-meta">Status • just now</p>
                 </div>
                 <div class="notification-status">Unread</div>
