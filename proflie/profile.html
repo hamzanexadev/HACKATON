@@ -7,7 +7,8 @@
     <title>HelpHub AI - Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #f6f0e7;
@@ -123,7 +124,7 @@
         .desktop-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 18px;
             flex: 1;
             min-width: 0;
@@ -344,7 +345,7 @@
             pointer-events: none;
         }
 
-        .hero > * {
+        .hero>* {
             position: relative;
             z-index: 1;
         }
@@ -539,6 +540,10 @@
             .hero {
                 padding: 40px 32px;
             }
+
+            .brand {
+                margin: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -554,6 +559,10 @@
 
             .hero p {
                 font-size: 15px;
+            }
+
+            .brand {
+                margin: 0;
             }
 
             .panel {
@@ -599,6 +608,10 @@
                 padding: 18px;
             }
 
+            .brand {
+                margin: 0;
+            }
+
             .panel h2 {
                 font-size: 18px;
                 margin-bottom: 18px;
@@ -637,7 +650,7 @@
             <div class="desktop-nav">
                 <nav class="nav" aria-label="Primary">
                     <a href="../index.html">Dashboard</a>
-                    <a href="./profile.html" class="active">Onboarding</a>
+                    <a href="./profile.html">Onboarding</a>
                     <a href="#" class="active">Profile</a>
                 </nav>
             </div>
@@ -664,7 +677,7 @@
 
         <nav class="mobile-nav" aria-label="Mobile Primary">
             <a href="../index.html">Dashboard</a>
-            <a href="./profile.html" class="active">Onboarding</a>
+            <a href="./profile.html">Onboarding</a>
             <a href="#" class="active">Profile</a>
         </nav>
     </aside>
@@ -692,7 +705,9 @@
                 </div>
 
                 <div style="margin: 24px 0;">
-                    <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 12px 0; text-transform: uppercase; color: var(--muted);">Skills</h3>
+                    <h3
+                        style="font-size: 14px; font-weight: 700; margin: 0 0 12px 0; text-transform: uppercase; color: var(--muted);">
+                        Skills</h3>
                     <div class="tags-row">
                         <span class="tag">Figma</span>
                         <span class="tag">UI/UX</span>
@@ -702,7 +717,9 @@
                 </div>
 
                 <div>
-                    <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 12px 0; text-transform: uppercase; color: var(--muted);">Badges</h3>
+                    <h3
+                        style="font-size: 14px; font-weight: 700; margin: 0 0 12px 0; text-transform: uppercase; color: var(--muted);">
+                        Badges</h3>
                     <div class="tags-row">
                         <span class="tag">Design Ally</span>
                         <span class="tag">Fast Responder</span>
