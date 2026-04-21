@@ -124,7 +124,7 @@
         .desktop-nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             gap: 18px;
             flex: 1;
             min-width: 0;
@@ -406,7 +406,7 @@
             pointer-events: none;
         }
 
-        .hero > * {
+        .hero>* {
             position: relative;
             z-index: 1;
         }
@@ -622,6 +622,10 @@
             .hero {
                 padding: 48px 32px;
             }
+
+            .brand {
+                margin: 0px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -643,6 +647,10 @@
                 gap: 32px;
                 margin-top: 32px;
                 margin-bottom: 40px;
+            }
+
+            .brand {
+                margin: 0px;
             }
 
             .form-card,
@@ -692,6 +700,10 @@
             .content {
                 gap: 24px;
                 margin-top: 24px;
+            }
+
+            .brand {
+                margin: 0px;
             }
 
             .form-card,
@@ -756,18 +768,16 @@
 
             <div class="desktop-nav">
                 <nav class="nav" aria-label="Primary">
-                    <a href="../index.html">Home</a>
+                    <a href="../index.html">Dashboard</a>
                     <a href="../explore/explore.html">Explore</a>
-                    <a href="../AIcenter/aicenter.html">AICenter</a>
-                    <a href="./request.html" class="active">Request</a>
-                    <a href="../proflie/profile.html">Profile</a>
-                    <a href="../login/login.html">Login</a>
+                    <a href="./request.html" class="active">Create Request</a>
+
                 </nav>
 
-                <div class="actions">
+                <!-- <div class="actions">
                     <a class="signal-pill" href="#">Live community signals</a>
                     <a class="button button-primary" href="#">Join the platform</a>
-                </div>
+                </div> -->
             </div>
 
             <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
@@ -791,19 +801,16 @@
         </div>
 
         <nav class="mobile-nav" aria-label="Mobile Primary">
-            <a href="../index.html">Home</a>
+            <a href="../index.html">Dashboard</a>
             <a href="../explore/explore.html">Explore</a>
-            <a href="../leaderboad/leaderboard.html">Leaderboard</a>
-            <a href="../AIcenter/aicenter.html">AICenter</a>
-            <a href="../notification/notification.html">Notifications</a>
-            <a href="./request.html" class="active">Request</a>
-            <a href="../proflie/profile.html">Profile</a>
+            <a href="./request.html" class="active">Create Request</a>
+
         </nav>
 
-        <div class="mobile-actions">
+        <!-- <div class="mobile-actions">
             <a class="signal-pill" href="#">Live community signals</a>
             <a class="button button-primary" href="#">Join the platform</a>
-        </div>
+        </div> -->
     </aside>
 
     <div class="shell">
@@ -824,7 +831,8 @@
 
                 <div class="form-field">
                     <label for="description">Detailed Description</label>
-                    <textarea id="description" placeholder="Provide context and details about what you need help with..."></textarea>
+                    <textarea id="description"
+                        placeholder="Provide context and details about what you need help with..."></textarea>
                 </div>
 
                 <div class="form-row">
@@ -869,22 +877,26 @@
 
                 <div class="guidance-item">
                     <strong>Be Specific</strong>
-                    <p>Include clear details about your problem and what you've already tried. This helps helpers understand exactly what you need.</p>
+                    <p>Include clear details about your problem and what you've already tried. This helps helpers
+                        understand exactly what you need.</p>
                 </div>
 
                 <div class="guidance-item">
                     <strong>Set Clear Goals</strong>
-                    <p>Define what success looks like. Are you learning, building, or debugging? Do you need a quick fix or long-term mentoring?</p>
+                    <p>Define what success looks like. Are you learning, building, or debugging? Do you need a quick fix
+                        or long-term mentoring?</p>
                 </div>
 
                 <div class="guidance-item">
                     <strong>Add Context</strong>
-                    <p>Share relevant background: your experience level, project scope, deadline, and any constraints. This helps match you with the right helper.</p>
+                    <p>Share relevant background: your experience level, project scope, deadline, and any constraints.
+                        This helps match you with the right helper.</p>
                 </div>
 
                 <div class="guidance-item">
                     <strong>Be Realistic</strong>
-                    <p>Ask for help that one person can reasonably provide in a session or two. Massive projects work better with ongoing partnerships.</p>
+                    <p>Ask for help that one person can reasonably provide in a session or two. Massive projects work
+                        better with ongoing partnerships.</p>
                 </div>
             </aside>
         </div>
